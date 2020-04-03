@@ -1,4 +1,4 @@
-from .local import *
+from .base import *
 
 DEBUG = False
 
@@ -30,3 +30,5 @@ MEDIA_ROOT = os.environ.setdefault(
 MEDIA_URL = os.environ.setdefault('WAGTAILWEBSITEBUILDER_MEDIA_URL', '/media/')
 
 COMPRESS_OFFLINE = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
