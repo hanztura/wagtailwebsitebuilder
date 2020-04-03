@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags compress %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+  <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer>
+  </script>  
+{% endblock extra_css %}
+
+
+{% block content %}
+  <header>
+    <nav id="navBar" class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          {% image self.navbar_icon fill-112x28 %}
+        </a>
+
+        <a
+          :class="{ 'navbar-burger burger': true, 'is-active': burgerIsActive}"
+          @click="toggleBurger"
+          role="button"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div
+        id="navbarBasicExample"
+        :class="{ 'navbar-menu': true, 'is-active': burgerIsActive}">
+
+        <div class="navbar-end">
+          {% for navbar_item in page.navbar_items.all %}
+            <a class="navbar-item" href="{{ navbar_item.navbar_item.link }}" @click="toggleBurger">
+              {{ navbar_item.navbar_item.text}}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="content">
+    <section class="hero is-medium is-dark is-bold">
+      <div class="hero-body">
+        <div class="container">
+            <h1 class="title">{{self.title}}</h1>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        {% include_block page.body  %}
+      </div>
+      <div class="container">
+        <form id="contactForm" class="form" action="{% url 'ajax_contact_forms:simple' %}" method="POST" @submit.prevent="sendContactForm">
+            {% csrf_token %}
+
+            <div class="field">
+              <label class="label">Message</label>
+              <div class="control">
+                <textarea class="textarea" v-model="message" required placeholder="Message"></textarea>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Email Address</label>
+              <div class="control">
+                <input class="input" type="email" v-model="emailAddress" required placeholder="john@domain.com">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control">
+                <input class="input" type="text" v-model="name" placeholder="Your name is optional">
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <template>
+                  <vue-recaptcha
+                    ref="recaptcha"
+                    :sitekey="recaptchaSiteKey"
+                    size="invisible"
+                    @verify="onVerify"
+                    @expired="onExpired"></vue-recaptcha>
+                </template>
+              </div>
+              <p
+                :class="{'help': true, 'is-danger': showRecaptchaHelp }"
+                v-show="showRecaptchaHelp">Help X of Y prevent spams. Thank you for your understanding <3.</p>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button class="button is-dark is-fullwidth" :disabled="!enableSending">Submit</button>
+              </div>
+            </div>
+
+            <modal-card
+              :message="'Your message has been sent'"
+              :title="'Thank you!'"
+              :show-modal="showThankYouModal"
+              @close-modal="closeModal"></modal-card>
+        </form>
+      </div>
+    </section>
+  </main>
+{% endblock content %}
+
+{% block extra_js %}
+  {% if debug %}
+    <script src="{% static 'vendor/vue/vue.js' %}"></script>
+    <script src="{% static 'vendor/axios.min.js' %}"></script>
+    <script src="{% static 'vendor/vue-recaptcha.js' %}"></script>
+  {% else %}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-recaptcha@latest/dist/vue-recaptcha.min.js"></script>
+  {% endif %}
+
+  {% compress js %}
+    <script src="{% static "home/navBarApp.js" %}"></script>
+    <script src="{% static "home/componentModal.js" %}"></script>
+    <script src="{% static "ajax_contact_forms/contactFormApp.js" %}"></script>
+  {% endcompress %}
+{% endblock extra_js %}
