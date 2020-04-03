@@ -58,7 +58,6 @@ INSTALLED_APPS = [
 
 
     'django_extensions',
-    'debug_toolbar',
     'compressor',
     'meta',
     'wagtailmetadata',
@@ -67,8 +66,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
