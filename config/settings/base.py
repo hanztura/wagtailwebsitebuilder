@@ -54,10 +54,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
+
 
     'django_extensions',
     'debug_toolbar',
     'compressor',
+    'meta',
+    'wagtailmetadata',
 
     'ajax_contact_forms',
 ]
@@ -93,6 +97,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'home.context_processors.get_google_analytics',
             ],
         },
     },
@@ -177,4 +182,8 @@ WAGTAIL_SITE_NAME = "wagtailwebsitebuilder"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://example.com'
+BASE_URL = os.environ.setdefault(
+    'WAGTAILWEBSITEBUILDER_BASE_URL', 'https://xofytech.com')
+
+GOOGLE_ANALYTICS_PROPERTY_ID = os.environ.setdefault(
+    'WAGTAILWEBSITEBUILDER_GOOGLE_ANALYTICS_PROPERTY_ID', '')

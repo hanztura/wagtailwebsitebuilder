@@ -1,25 +1,29 @@
-{% load static wagtailuserbar %}
+{% load static wagtailuserbar meta %}
 
 <!DOCTYPE html>
 <html class="no-js has-navbar-fixed-top" lang="en">
-    <head>
+    <head {% meta_namespaces %}>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS_ID }}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '{{ GOOGLE_ANALYTICS_ID }}');
+        </script>
+
         <meta charset="utf-8" />
         <title>
             {% block title %}
                 {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
             {% endblock %}
-            {% block title_suffix %}
-                {% with self.get_site.site_name as site_name %}
-                    {% if site_name %}- {{ site_name }}{% endif %}
-                {% endwith %}
-            {% endblock %}
         </title>
-        <meta name="description" content="" />
+        {% include "meta/meta.html" %}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Global stylesheets #}
         <link rel="stylesheet" href="{% static 'css/bulma-0.8.0/css/bulma.min.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/wagtailwebsitebuilder.css' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -38,7 +42,6 @@
         {% block content %}{% endblock %}
 
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/wagtailwebsitebuilder.js' %}"></script>
 
 
         {% block extra_js %}

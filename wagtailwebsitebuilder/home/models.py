@@ -10,6 +10,7 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtailmetadata.models import MetadataPageMixin
 
 
 @register_snippet
@@ -41,7 +42,7 @@ class HomePageNavBarItem(Orderable, models.Model):
     ]
 
 
-class HomePage(Page):
+class HomePage(MetadataPageMixin, Page):
     body = StreamField([
         ('with_id', blocks.StructBlock(
             [
@@ -64,3 +65,5 @@ class HomePage(Page):
         InlinePanel('navbar_items', label='Navbar Items'),
         StreamFieldPanel('body', classname='full'),
     ]
+
+    promote_panels = Page.promote_panels + MetadataPageMixin.panels
