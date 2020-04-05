@@ -4,12 +4,12 @@ from django.contrib import admin
 from django.urls import path
 
 from wagtail.admin import urls as wagtailadmin_urls
-from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
-from puput import urls as puput_urls 
+from puput import urls as puput_urls
 
 from search import views as search_views
+from home.sitemaps.views import sitemap
 
 urlpatterns = [
     path('sitemap.xml', sitemap),
