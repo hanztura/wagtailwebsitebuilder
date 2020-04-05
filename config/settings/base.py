@@ -45,6 +45,12 @@ INSTALLED_APPS = [
     'wagtail.admin',
     'wagtail.core',
 
+    'wagtail.contrib.sitemaps',
+    'wagtail.contrib.routable_page',
+    'django_social_share',
+    'puput',
+    'colorful',
+
     'modelcluster',
     'taggit',
 
@@ -187,3 +193,5 @@ BASE_URL = os.environ.setdefault(
 
 GOOGLE_ANALYTICS_PROPERTY_ID = os.environ.setdefault(
     'WAGTAILWEBSITEBUILDER_GOOGLE_ANALYTICS_PROPERTY_ID', '')
+
+PUPUT_AS_PLUGIN = True
