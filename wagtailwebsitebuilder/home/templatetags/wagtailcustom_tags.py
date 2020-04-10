@@ -27,7 +27,7 @@ def add_id_attribute(match):
     n = match.group(1)
     text_content = match.group(2)
     id = slugify(text_content)
-    return f'<h{n}><a id="{id}""></a><a href="#{id}">{text_content}</a></h{n}>'
+    return f'<h{n} id="{id}">{text_content}</h{n}>'
 
 
 def with_heading_ids(self):
