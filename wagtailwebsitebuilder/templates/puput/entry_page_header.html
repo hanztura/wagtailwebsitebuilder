@@ -1,6 +1,6 @@
 {% load puput_tags %}
 <header>
     <h1 class="title post_title has-text-black">
-        <a class="has-text-black" href="{% entry_url entry blog_page %}">{{ entry.title }}</a>
+        <a class="has-text-black" href="{{entry.get_absolute_url}}">{{ entry.title }}</a>
     </h1>
 </header>

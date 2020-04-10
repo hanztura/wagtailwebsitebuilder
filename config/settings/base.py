@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'wagtail.admin',
     'wagtail.core',
 
+    'wagtail.contrib.table_block',
     'wagtail.contrib.sitemaps',
     'wagtail.contrib.routable_page',
     'django_social_share',
@@ -69,6 +70,7 @@ INSTALLED_APPS = [
     'wagtailmetadata',
 
     'ajax_contact_forms',
+    'puputextension',
 ]
 
 MIDDLEWARE = [
