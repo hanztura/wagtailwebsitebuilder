@@ -15,8 +15,13 @@ urlpatterns = [
     path('sitemap.xml', sitemap),
 
     path(settings.DJANGO_ADMIN_URL, admin.site.urls),
-
     path(settings.WAGTAIL_CMS_URL, include(wagtailadmin_urls)),
+
+    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
+    path(
+        'cms/',
+        include('admin_honeypot.urls', namespace='admin_honeypot_cms')),
+
     path('documents/', include(wagtaildocs_urls)),
 
     url(r'^search/$', search_views.search, name='search'),

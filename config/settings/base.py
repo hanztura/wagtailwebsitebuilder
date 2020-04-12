@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
 
-
+    'admin_honeypot',
     'django_extensions',
     'compressor',
     'meta',
