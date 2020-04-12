@@ -63,7 +63,8 @@ class HomePage(CSSMixin, MetadataPageMixin, Page):
         null=True)
     css = models.FileField(
         upload_to='css/home/',
-        null=True)
+        null=True,
+        blank=True)
 
     content_panels = Page.content_panels + [
         ImageChooserPanel('navbar_icon'),

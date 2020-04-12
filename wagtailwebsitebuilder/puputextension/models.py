@@ -34,7 +34,8 @@ class StreamBodyEntryPage(
     ])
     css = models.FileField(
         upload_to='css/puput/entry_page/',
-        null=True)
+        null=True,
+        blank=True)
 
     content_panels = [
         StreamFieldPanel('stream_body', classname="full"),
