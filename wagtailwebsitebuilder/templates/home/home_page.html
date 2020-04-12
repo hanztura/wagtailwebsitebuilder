@@ -124,18 +124,18 @@
 
 {% block extra_js %}
   {% if debug %}
-    <script src="{% static 'vendor/vue/vue.js' %}"></script>
-    <script src="{% static 'vendor/axios.min.js' %}"></script>
-    <script src="{% static 'vendor/vue-recaptcha.js' %}"></script>
+    <script src="{% static 'vendor/vue/vue.js' %}" defer></script>
+    <script src="{% static 'vendor/axios.min.js' %}" defer></script>
+    <script src="{% static 'vendor/vue-recaptcha.js' %}" defer></script>
   {% else %}
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/vue-recaptcha@latest/dist/vue-recaptcha.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js" defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+    <script src="https://unpkg.com/vue-recaptcha@latest/dist/vue-recaptcha.min.js" defer></script>
   {% endif %}
 
   {% compress js %}
-    <script src="{% static "home/navBarApp.js" %}"></script>
-    <script src="{% static "home/componentModal.js" %}"></script>
-    <script src="{% static "ajax_contact_forms/contactFormApp.js" %}"></script>
+    <script src="{% static "home/navBarApp.js" %}" defer></script>
+    <script src="{% static "home/componentModal.js" %}" defer></script>
+    <script src="{% static "ajax_contact_forms/contactFormApp.js" %}" defer></script>
   {% endcompress %}
 {% endblock extra_js %}
