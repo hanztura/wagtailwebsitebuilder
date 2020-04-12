@@ -14,9 +14,9 @@ from home.sitemaps.views import sitemap
 urlpatterns = [
     path('sitemap.xml', sitemap),
 
-    path('django-admin/', admin.site.urls),
+    path(settings.DJANGO_ADMIN_URL, admin.site.urls),
 
-    path('admin/', include(wagtailadmin_urls)),
+    path(settings.WAGTAIL_CMS_URL, include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
 
     url(r'^search/$', search_views.search, name='search'),

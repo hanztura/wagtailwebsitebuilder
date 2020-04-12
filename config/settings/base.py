@@ -183,6 +183,10 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+DJANGO_ADMIN_URL = os.environ.setdefault(
+    'WAGTAILWEBSITEBUILDER_DJANGO_ADMIN_URL', 'admin/')
+WAGTAIL_CMS_URL = os.environ.setdefault(
+    'WAGTAILWEBSITEBUILDER_WAGTAIL_CMS_URL', 'cms/')
 
 # Wagtail settings
 
