@@ -34,7 +34,10 @@
         {% endblock %}
         
         {# Global stylesheets #}
-        <link rel="stylesheet" href="{% static 'css/bulma-0.8.0/css/bulma.min.css' %}">
+        {% block global_css %}
+            <link rel="preload" as="style" href="{% static 'css/bulma-0.8.0/css/bulma.min.css' %}" onload="this.onload=null;this.rel='stylesheet'">     
+            <noscript><link rel="stylesheet" href="{% static 'css/bulma-0.8.0/css/bulma.min.css' %}"></noscript>
+        {% endblock global_css %}
 
 
 

@@ -8,6 +8,13 @@
   </script>  
 {% endblock extra_css %}
 
+{% block global_css %}
+  {% if page.css_url %}
+      <link rel="stylesheet" type="text/css" href="{{ page.css_url }}">
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock global_css %}
 
 {% block base_content %}
   <header>

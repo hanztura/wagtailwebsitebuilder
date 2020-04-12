@@ -1,3 +1,5 @@
+from django.db import models
+
 from puput.models import EntryPage, BlogPage
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.core import blocks
@@ -8,8 +10,12 @@ from wagtail.admin.edit_handlers import (
     FieldPanel, MultiFieldPanel, InlinePanel,
     PageChooserPanel, StreamFieldPanel)
 
+from home.db import CSSMixin
 
-class StreamBodyEntryPage(EntryPage):
+
+class StreamBodyEntryPage(
+        CSSMixin,
+        EntryPage):
     stream_body = StreamField([
         ('with_id', blocks.StructBlock(
             [
@@ -26,11 +32,15 @@ class StreamBodyEntryPage(EntryPage):
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock())
     ])
+    css = models.FileField(
+        upload_to='css/puput/entry_page/',
+        null=True)
 
     content_panels = [
         StreamFieldPanel('stream_body', classname="full"),
         MultiFieldPanel(
             [
+                FieldPanel('css', classname='full'),
                 FieldPanel('title', classname="title"),
                 ImageChooserPanel('header_image'),
                 FieldPanel('excerpt', classname="full"),

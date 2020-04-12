@@ -12,6 +12,8 @@ from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtailmetadata.models import MetadataPageMixin
 
+from .db import CSSMixin
+
 
 @register_snippet
 class NavBarItem(models.Model):
@@ -42,7 +44,7 @@ class HomePageNavBarItem(Orderable, models.Model):
     ]
 
 
-class HomePage(MetadataPageMixin, Page):
+class HomePage(CSSMixin, MetadataPageMixin, Page):
     body = StreamField([
         ('with_id', blocks.StructBlock(
             [
@@ -59,10 +61,14 @@ class HomePage(MetadataPageMixin, Page):
         on_delete=models.SET_NULL,
         related_name='+',
         null=True)
+    css = models.FileField(
+        upload_to='css/home/',
+        null=True)
 
     content_panels = Page.content_panels + [
         ImageChooserPanel('navbar_icon'),
         InlinePanel('navbar_items', label='Navbar Items'),
+        FieldPanel('css', classname='full'),
         StreamFieldPanel('body', classname='full'),
     ]
 

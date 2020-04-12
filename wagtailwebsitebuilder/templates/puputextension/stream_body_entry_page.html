@@ -5,6 +5,14 @@
     {{ self.title }} | {{ blog_page.title }}
 {% endblock title %}
 
+{% block global_css %}
+  {% if page.css_url %}
+      <link rel="stylesheet" type="text/css" href="{{ page.css_url }}">
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock global_css %}
+
 {% block meta_title %}
     {% if self.seo_title %}
         {{ self.seo_title }}
