@@ -13,6 +13,7 @@ from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtailmetadata.models import MetadataPageMixin
 
 from .db import CSSMixin
+from puputextension.helpers import CodeBlock
 
 
 @register_snippet
@@ -54,6 +55,7 @@ class HomePage(CSSMixin, MetadataPageMixin, Page):
             template='home/blocks/with_id.html'
         )),
         ('paragraph', blocks.RichTextBlock()),
+        ('code', CodeBlock()),
         ('image', ImageChooserBlock())
     ])
     navbar_icon = models.ForeignKey(
