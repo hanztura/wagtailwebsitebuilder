@@ -79,8 +79,9 @@ class CodeChoiceBlock(blocks.ChoiceBlock):
 
 
 LANGUAGES = (
-    ('python3', 'Python 3'),
     ('bash', 'Bash/Shell'),
+    ('java', 'Java'),
+    ('python3', 'Python 3'),
     ('javascript', 'Javascript'),
     ('css', "CSS"),
     ('html', "HTML"),
