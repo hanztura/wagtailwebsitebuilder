@@ -3,6 +3,7 @@ from django.db import models
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (
     FieldPanel, InlinePanel, StreamFieldPanel)
+from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.core import blocks
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page, Orderable
@@ -55,6 +56,11 @@ class HomePage(CSSMixin, MetadataPageMixin, Page):
             template='home/blocks/with_id.html'
         )),
         ('paragraph', blocks.RichTextBlock()),
+        ('table', TableBlock(table_options={
+            'minSpareRows': 1,
+            'startRows': 3,
+            'startCols': 3
+        })),
         ('code', CodeBlock()),
         ('image', ImageChooserBlock())
     ])
