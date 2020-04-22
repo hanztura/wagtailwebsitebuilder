@@ -9,6 +9,7 @@
 {% endblock extra_css %}
 
 {% block global_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/code.css' %}">
   {% if page.css_url %}
       <link rel="stylesheet" type="text/css" href="{{ page.css_url }}">
   {% else %}
