@@ -10,6 +10,7 @@ from wagtail.admin.edit_handlers import (
     FieldPanel, MultiFieldPanel, InlinePanel,
     PageChooserPanel, StreamFieldPanel)
 
+from .helpers import CodeBlock
 from home.db import CSSMixin
 
 
@@ -30,6 +31,7 @@ class StreamBodyEntryPage(
             'startCols': 3
         })),
         ('paragraph', blocks.RichTextBlock()),
+        ('code', CodeBlock()),
         ('image', ImageChooserBlock())
     ])
     css = models.FileField(

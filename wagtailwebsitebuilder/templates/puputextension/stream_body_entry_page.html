@@ -1,11 +1,12 @@
 {% extends "puput/base.html" %}
-{% load i18n wagtailcore_tags wagtailimages_tags puput_tags social_share %}
+{% load i18n wagtailcore_tags wagtailimages_tags puput_tags social_share static %}
 
 {% block title %}
     {{ self.title }} | {{ blog_page.title }}
 {% endblock title %}
 
 {% block global_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/code.css' %}">
   {% if page.css_url %}
       <link rel="stylesheet" type="text/css" href="{{ page.css_url }}">
   {% else %}
