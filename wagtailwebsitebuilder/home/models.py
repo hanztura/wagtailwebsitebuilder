@@ -57,9 +57,27 @@ class HomePage(CSSMixin, MetadataPageMixin, Page):
         )),
         ('paragraph', blocks.RichTextBlock()),
         ('table', TableBlock(table_options={
-            'minSpareRows': 1,
+            'minSpareRows': 0,
             'startRows': 3,
-            'startCols': 3
+            'startCols': 3,
+            'contextMenu': [
+                'row_above',
+                'row_below',
+                '---------',
+                'col_left',
+                'col_right',
+                '---------',
+                'remove_row',
+                'remove_col',
+                '---------',
+                'undo',
+                'redo',
+                '---------',
+                'copy',
+                'cut'
+                '---------',
+                'alignment',
+            ],
         })),
         ('code', CodeBlock()),
         ('image', ImageChooserBlock())

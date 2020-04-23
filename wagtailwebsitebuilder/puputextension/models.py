@@ -26,9 +26,27 @@ class StreamBodyEntryPage(
             template='home/blocks/with_id.html'
         )),
         ('table', TableBlock(table_options={
-            'minSpareRows': 2,
+            'minSpareRows': 0,
             'startRows': 3,
-            'startCols': 3
+            'startCols': 3,
+            'contextMenu': [
+                'row_above',
+                'row_below',
+                '---------',
+                'col_left',
+                'col_right',
+                '---------',
+                'remove_row',
+                'remove_col',
+                '---------',
+                'undo',
+                'redo',
+                '---------',
+                'copy',
+                'cut'
+                '---------',
+                'alignment',
+            ],
         })),
         ('paragraph', blocks.RichTextBlock()),
         ('code', CodeBlock()),
