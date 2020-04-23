@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail.core',
+    'wagtail.contrib.settings',
 
     'wagtail.contrib.table_block',
     'wagtail.contrib.sitemaps',
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'django_social_share',
     'puput',
     'colorful',
+    'colorfield',
 
     'modelcluster',
     'taggit',
@@ -71,6 +73,7 @@ INSTALLED_APPS = [
 
     'ajax_contact_forms',
     'puputextension',
+    'multisite',
 ]
 
 MIDDLEWARE = [
@@ -102,6 +105,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'wagtail.contrib.settings.context_processors.settings',
                 'home.context_processors.get_google_analytics',
             ],
         },

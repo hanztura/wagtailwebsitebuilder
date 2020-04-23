@@ -1,0 +1,13 @@
+{% load multisite_tags wagtailcore_tags %}
+{% get_site_root as site_root %}
+
+{# Implementation of bootstrap theme dropdown menu - shows top level links and their children #}
+<nav class="top-menu">
+    <ul class="menu-list">
+        {% for menuitem in menuitems %}
+            <li class='menu-item'>
+                <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
