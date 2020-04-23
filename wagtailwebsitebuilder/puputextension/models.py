@@ -1,17 +1,41 @@
 from django.db import models
 
+from modelcluster.fields import ParentalKey
 from puput.models import EntryPage, BlogPage
-from wagtail.contrib.table_block.blocks import TableBlock
-from wagtail.core import blocks
-from wagtail.core.fields import StreamField
-from wagtail.images.blocks import ImageChooserBlock
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.admin.edit_handlers import (
     FieldPanel, MultiFieldPanel, InlinePanel,
     PageChooserPanel, StreamFieldPanel)
+from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail.core import blocks
+from wagtail.core.fields import StreamField
+from wagtail.core.models import Orderable
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from .helpers import CodeBlock
 from home.db import CSSMixin
+
+
+class CustomBlogPageNavBarItem(Orderable, models.Model):
+    page = ParentalKey(
+        'puputextension.CustomBlogPage',
+        on_delete=models.CASCADE,
+        related_name='navbar_items')
+    navbar_item = models.ForeignKey(
+        'home.NavBarItem',
+        on_delete=models.CASCADE,
+        related_name='in_custom_blog_pages')
+
+    panels = [
+        SnippetChooserPanel('navbar_item')
+    ]
+
+
+class CustomBlogPage(BlogPage):
+    content_panels = BlogPage.content_panels + [
+        InlinePanel('navbar_items', label='Navbar Items'),
+    ]
 
 
 class StreamBodyEntryPage(

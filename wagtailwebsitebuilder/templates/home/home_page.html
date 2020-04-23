@@ -10,6 +10,38 @@
 
 {% block global_css %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/code.css' %}">
+  {% with primary=settings.multisite.SiteBranding.primary_color secondary=settings.multisite.SiteBranding.secondary_color accent=settings.multisite.SiteBranding.accent_color accent_2=settings.multisite.SiteBranding.accent_2_color %}
+    <style>
+      .site-background-primary {
+        background-color: {{ primary }} !important;
+        color: {{ secondary }};
+      }
+      .site-background-secondary {
+        background-color: {{ secondary }} !important;
+        color: {{ accent_2 }};
+      }
+      .site-background-accent {
+        background-color: {{ accent }} !important;
+        color: {{ accent_2 }};
+      }
+      .site-background-accent-2 {
+        background-color: {{ accent_2 }} !important;
+        color: {{ secondary }};
+      }
+      .site-text-primary {
+        color: {{ primary }} !important;
+      }
+      .site-text-secondary {
+        color: {{ secondary }} !important;
+      }
+      .site-text-accent {
+        color: {{ accent }} !important;
+      }
+      .site-text-accent-2 {
+        color: {{ accent_2 }} !important;
+      }
+    </style> 
+  {% endwith %}
   {% if page.css_url %}
       <link rel="stylesheet" type="text/css" href="{{ page.css_url }}">
   {% else %}
@@ -19,7 +51,7 @@
 
 {% block base_content %}
   <header>
-    <nav id="navBar" class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <nav id="navBar" class="navbar is-fixed-top has-background-primary" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="#">
           {% image settings.multisite.SiteBranding.nav_icon fill-112x28 %}
@@ -54,10 +86,11 @@
   </header>
 
   <main class="content">
-    <section class="hero is-medium is-dark is-bold">
+    <section
+      class="hero is-medium is-bold site-background-primary">
       <div class="hero-body">
         <div class="container">
-            <h1 class="title">{{self.title}}</h1>
+            <h1 class="title site-text-secondary">{{self.title}}</h1>
         </div>
       </div>
     </section>
@@ -108,7 +141,7 @@
             </div>
             <div class="field">
               <div class="control">
-                <button class="button is-dark is-fullwidth" :disabled="!enableSending">Submit</button>
+                <button class="button site-background-accent is-fullwidth" :disabled="!enableSending">Submit</button>
               </div>
             </div>
 

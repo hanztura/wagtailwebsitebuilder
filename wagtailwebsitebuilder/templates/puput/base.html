@@ -29,21 +29,53 @@
 {% block extra_css %}
     <style>
         body {
-            --main-color: {{blog_page.main_color}};
+            --main-color: {{ settings.multisite.SiteBranding.primary_color }};
         }
     </style>
     <link rel="stylesheet" href="{% static 'puput/css/puput.css' %}"/>
+    {% with primary=settings.multisite.SiteBranding.primary_color secondary=settings.multisite.SiteBranding.secondary_color accent=settings.multisite.SiteBranding.accent_color accent_2=settings.multisite.SiteBranding.accent_2_color %}
+      <style>
+        .site-background-primary {
+          background-color: {{ primary }} !important;
+          color: {{ secondary }};
+        }
+        .site-background-secondary {
+          background-color: {{ secondary }} !important;
+          color: {{ accent_2 }};
+        }
+        .site-background-accent {
+          background-color: {{ accent }} !important;
+          color: {{ accent_2 }};
+        }
+        .site-background-accent-2 {
+          background-color: {{ accent_2 }} !important;
+          color: {{ secondary }};
+        }
+        .site-text-primary {
+          color: {{ primary }} !important;
+        }
+        .site-text-secondary {
+          color: {{ secondary }} !important;
+        }
+        .site-text-accent {
+          color: {{ accent }} !important;
+        }
+        .site-text-accent-2 {
+          color: {{ accent_2 }} !important;
+        }
+      </style> 
+    {% endwith %}
 {% endblock %}
 
 {% block header %}
   {% block blog_header %}
     <header class="header">
-      <section class="hero is-medium is-dark is-bold">
+      <section class="hero is-medium is-bold site-background-primary">
         <div class="hero-body">
           <div class="container">
             {% block header_title %}
               <h1 class="title">
-                  <a class="has-text-white" href="{% pageurl blog_page %}">{{ blog_page.title }}</a>
+                  <a class="site-text-secondary" href="{% pageurl blog_page %}">{{ blog_page.title }}</a>
               </h1>
             {% endblock header_title %}
             {% if not blog_page.header_image %}
@@ -56,12 +88,13 @@
   {% endblock blog_header %}
 {% endblock header %}
 
+
 {% block base_content %}
-  <nav id="navBar" class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <nav id="navBar" class="navbar is-fixed-top has-background-primary" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
         {# {% image self.navbar_icon fill-112x28 %} #}
-        X of Y Business and IT Services
+        {% image settings.multisite.SiteBranding.nav_icon fill-112x28 %}
       </a>
 
       <a
@@ -77,22 +110,18 @@
       </a>
     </div>
 
-    <div
-      id="navbarBasicExample"
-      :class="{ 'navbar-menu': true, 'is-active': burgerIsActive}">
+    {% block base_content_navbar_item %}
+      <div
+        id="navbarBasicExample"
+        :class="{ 'navbar-menu': true, 'is-active': burgerIsActive}">
 
-      <div class="navbar-end">
-        <a class="navbar-item" href="/">
-          Home
-        </a>
-        <a class="navbar-item" href="/#products-and-services">
-          Products & Services
-        </a>
-        <a class="navbar-item" href="/#contact">
-          Contact
-        </a>
+        <div class="navbar-end">
+          <a class="navbar-item" href="/">
+            Home
+          </a>
+        </div>
       </div>
-    </div>
+    {% endblock %}
   </nav>
 
   <main class="content">
@@ -115,7 +144,7 @@
                           <div class="input-group">
                                <input type="search" name="q" placeholder="{% trans 'Search' %}">
                                <span class="input-group-btn">
-                                  <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                  <button class="btn btn-default site-background-primary" type="submit"><i class="fa fa-search"></i></button>
                                </span>
                           </div>
                       </form>
@@ -159,13 +188,13 @@
 {% endblock base_content %}
 
 {% block footer %}
-  <footer class="footer" style="background-color: black;">
+  <footer class="footer site-background-primary">
     <div class="content has-text-centered">
         <div class="copy">
             <p>
-                Powered by <a href="http://www.djangoproject.com" rel="nofollow">Django</a>,
-                <a href="http://www.wagtail.io" rel="nofollow">Wagtail</a> and
-                <a href="http://github.com/APSL/puput" rel="nofollow">Puput</a>
+                Powered by <a class="site-text-accent" href="http://www.djangoproject.com" rel="nofollow">Django</a>,
+                <a class="site-text-accent" href="http://www.wagtail.io" rel="nofollow">Wagtail</a> and
+                <a class="site-text-accent" href="http://github.com/APSL/puput" rel="nofollow">Puput</a>
             </p>
         </div>
     </div>

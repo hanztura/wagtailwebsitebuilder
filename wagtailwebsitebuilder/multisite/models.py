@@ -125,13 +125,17 @@ class SiteBranding(BaseSetting):
     primary_color = ColorField(default='#000000')
     secondary_color = ColorField(default='#000000')
     accent_color = ColorField(default='#000000')
-    text_color = ColorField(default='#000000')
+    accent_2_color = ColorField(default='#000000')
     banner_colour = models.CharField(
         max_length=6,
         null=True,
         blank=True,
         help_text="Fill in a hex colour value"
     )
+    css = models.FileField(
+        upload_to='css/sites/',
+        null=True,
+        blank=True)
 
     panels = [
         MultiFieldPanel(
@@ -147,8 +151,9 @@ class SiteBranding(BaseSetting):
                 FieldPanel('primary_color'),
                 FieldPanel('secondary_color'),
                 FieldPanel('accent_color'),
-                FieldPanel('text_color'),
+                FieldPanel('accent_2_color'),
             ),
             'Color Palette',
         ),
+        FieldPanel('css'),
     ]

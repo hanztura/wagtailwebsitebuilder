@@ -1,0 +1,17 @@
+{% extends "puput/blog_page.html" %}
+
+
+{% block base_content_navbar_item %}
+  <div
+    id="navbarBasicExample"
+    :class="{ 'navbar-menu': true, 'is-active': burgerIsActive}">
+
+    <div class="navbar-end">
+      {% for navbar_item in page.navbar_items.all %}
+        <a class="navbar-item" href="{{ navbar_item.navbar_item.link }}" @click="toggleBurger">
+          {{ navbar_item.navbar_item.text}}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
