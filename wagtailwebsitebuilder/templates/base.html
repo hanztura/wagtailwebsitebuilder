@@ -27,7 +27,7 @@
 
         {% block puput_head %}{% endblock %}
 
-        <link rel="icon" href="{{ settings.multisite.SiteBranding.nav_icon.file.url|default_if_none:'/favicon.ico' }}" />
+        <link rel="icon" href="{{ settings.multisite.SiteBranding.fav_icon.file.url|default_if_none:'/favicon.ico' }}" />
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
