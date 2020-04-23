@@ -4,7 +4,7 @@
 {% block base_content_navbar_item %}
   <div
     id="navbarBasicExample"
-    :class="{ 'navbar-menu': true, 'is-active': burgerIsActive}">
+    :class="{ 'navbar-menu has-background-primary': true, 'is-active': burgerIsActive}">
 
     <div class="navbar-end">
       {% for navbar_item in page.navbar_items.all %}
