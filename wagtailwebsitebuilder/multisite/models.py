@@ -167,3 +167,5 @@ class SeoSettings(BaseSetting):
         default=settings.GOOGLE_ANALYTICS_PROPERTY_ID,
         blank=True
     )
+    robots_txt = models.FileField(
+        upload_to='seo/')

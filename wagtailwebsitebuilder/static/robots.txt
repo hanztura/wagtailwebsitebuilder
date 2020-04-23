@@ -1,5 +1,3 @@
-# Rule 1
 User-agent: *
-Allow: /
-
-Sitemap: http://xofytech.com/sitemap.xml
+Disallow: /cms/
+Disallow: /admin/

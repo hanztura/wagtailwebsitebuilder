@@ -10,9 +10,11 @@ from puput import urls as puput_urls
 
 from search import views as search_views
 from home.sitemaps.views import sitemap
+from multisite.views import robots
 
 urlpatterns = [
     path('sitemap.xml', sitemap),
+    path('robots.txt', robots),
 
     path(settings.DJANGO_ADMIN_URL, admin.site.urls),
     path(settings.WAGTAIL_CMS_URL, include(wagtailadmin_urls)),
