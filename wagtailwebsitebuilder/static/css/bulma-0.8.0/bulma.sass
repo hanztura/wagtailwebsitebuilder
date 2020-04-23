@@ -3,6 +3,12 @@
 
 $family-sans-serif: "Open Sans", sans-serif
 
+$tableAlignments: ('htCenter': 'center', 'htJustify': 'justify', 'htLeft': 'left', 'htRight': 'right')
+
+@each $alignment, $text-align in $tableAlignments
+  .#{$alignment}
+    text-align: #{$text-align} !important
+
 @import "sass/utilities/_all"
 @import "sass/base/_all"
 @import "sass/elements/_all"
