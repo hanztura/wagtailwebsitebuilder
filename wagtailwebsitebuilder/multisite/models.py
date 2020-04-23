@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.db import models
+from django.conf import settings
 
 from colorfield.fields import ColorField
 from modelcluster.fields import ParentalKey
@@ -157,3 +158,12 @@ class SiteBranding(BaseSetting):
         ),
         FieldPanel('css'),
     ]
+
+
+@register_setting
+class SeoSettings(BaseSetting):
+    google_analytics_id = models.CharField(
+        max_length=50,
+        default=settings.GOOGLE_ANALYTICS_PROPERTY_ID,
+        blank=True
+    )
