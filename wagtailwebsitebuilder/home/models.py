@@ -14,6 +14,7 @@ from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtailmetadata.models import MetadataPageMixin
 
 from .db import CSSMixin
+from .helpers import json2obj, TocBlock
 from puputextension.helpers import CodeBlock
 
 
@@ -56,6 +57,7 @@ class HomePage(CSSMixin, MetadataPageMixin, Page):
             template='home/blocks/with_id.html'
         )),
         ('paragraph', blocks.RichTextBlock()),
+        ('toc', TocBlock()),
         ('table', TableBlock(table_options={
             'minSpareRows': 0,
             'startRows': 3,

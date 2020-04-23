@@ -1,0 +1,20 @@
+{% load home_tags %}
+
+<ul class="menu-list" id="toc">
+  <p class="menu-label button is-info" title="Click to show/hide table of contents" @click="showTOC = !showTOC">{{ value.title }}</p>
+  <template v-if="showTOC">
+      {% for item in value.toc_items|json_to_object %}
+        <li>
+          <a href="{{ item.link }}">{{ item.text }}</a>
+          {% if item.items %}
+            {% for subItem in item.items %}
+              <li>
+                <a href="{{ subItem.link }}">{{ subItem.text }}</a>
+              </li>
+            {% endfor %}
+          {% endif %}
+        </li>
+        
+      {% endfor %}
+  </template>
+</ul>

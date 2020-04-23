@@ -1,0 +1,18 @@
+<ul class="menu-list" id="toc">
+  <p class="menu-label" @click="showTOC = !showTOC">TOC</p>
+  <template v-if="showTOC">
+    {% for item in items %}
+      <li>
+        <a href="{{ item.link }}">{{ item.text }}</a>
+        {% if item.items %}
+          {% for subItem in item.items.all %}
+            <li>
+              <a href="{{ subItem.link }}">{{ subItem.text }}</a>
+            </li>
+          {% endfor %}
+        {% endif %}
+      </li>
+      
+    {% endfor %}
+  </template>
+</ul>
