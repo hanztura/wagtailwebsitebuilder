@@ -6,12 +6,12 @@
     <template v-if="showTOC">
         {% for item in value.toc_items|json_to_object %}
           <li>
-            <a href="{{ item.link }}">{{ item.text }}</a>
+            <a class="has-text-link" href="{{ item.link }}">{{ item.text }}</a>
             <ul>
               {% if item.items %}
                 {% for subItem in item.items %}
                   <li>
-                    <a href="{{ subItem.link }}">{{ subItem.text }}</a>
+                    <a class="has-text-link" href="{{ subItem.link }}">{{ subItem.text }}</a>
                   </li>
                 {% endfor %}
               {% endif %}
