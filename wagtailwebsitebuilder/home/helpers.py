@@ -59,7 +59,8 @@ IMAGE_CLASS_CHOICES = (
 class CustomImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     css_class = blocks.ChoiceBlock(
-        choices=IMAGE_CLASS_CHOICES)
+        choices=IMAGE_CLASS_CHOICES,
+        required=False)
     is_rounded = blocks.BooleanBlock(required=False)
 
     class Meta:
