@@ -29,6 +29,6 @@ MEDIA_ROOT = os.environ.setdefault(
     'WAGTAILWEBSITEBUILDER_MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
 MEDIA_URL = os.environ.setdefault('WAGTAILWEBSITEBUILDER_MEDIA_URL', '/media/')
 
-COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = False
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
