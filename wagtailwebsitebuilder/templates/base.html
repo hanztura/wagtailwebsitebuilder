@@ -59,8 +59,7 @@
         {# Global javascript #}
 
           {% addtoblock 'js' %}
-            <script defer src="{% static 'vendor/fontawesome-free-5.11.2-web/js/solid.min.js' %}"></script>
-            <script defer src="{% static 'vendor/fontawesome-free-5.11.2-web/js/brands.min.js' %}"></script>
+            <script defer src="{% static 'vendor/fontawesome-free-5.11.2-web/js/all.min.js' %}"></script>
           {% endaddtoblock %}
 
         {% render_block "js" postprocessor "compressor.contrib.sekizai.compress" %}
