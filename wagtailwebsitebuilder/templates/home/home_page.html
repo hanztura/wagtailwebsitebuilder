@@ -4,7 +4,7 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block extra_css %}
-  <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer>
+  <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" defer>
   </script>  
 {% endblock extra_css %}
 
@@ -15,26 +15,8 @@
       .site-background-primary {
         background-color: {{ primary }} !important;
       }
-      .site-background-secondary {
-        background-color: {{ secondary }} !important;
-      }
-      .site-background-accent {
-        background-color: {{ accent }} !important;
-      }
-      .site-background-accent-2 {
-        background-color: {{ accent_2 }} !important;
-      }
-      .site-text-primary {
-        color: {{ primary }} !important;
-      }
       .site-text-secondary {
         color: {{ secondary }} !important;
-      }
-      .site-text-accent {
-        color: {{ accent }} !important;
-      }
-      .site-text-accent-2 {
-        color: {{ accent_2 }} !important;
       }
     </style> 
   {% endwith %}

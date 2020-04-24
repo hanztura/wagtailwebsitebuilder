@@ -46,12 +46,6 @@
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"></noscript>
-
-        {% if debug %}
-            <script src='{% static "js/fontawesome.all.js" %}'></script>
-        {% else %}
-            <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-        {% endif %}
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
@@ -64,6 +58,13 @@
         {% block footer %}{% endblock footer %}
         {# Global javascript #}
 
+
+        {% if debug %}
+            <script src='{% static "js/fontawesome.all.js" %}'></script>
+        {% else %}
+            <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/solid.min.js"></script>
+            <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/brand.min.js"></script>
+        {% endif %}
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
