@@ -58,15 +58,10 @@
         {% block footer %}{% endblock footer %}
         {# Global javascript #}
 
-
-        {% if debug %}
-            <script src='{% static "js/fontawesome.all.js" %}'></script>
-        {% else %}
-          {% compress js %}
-            <script defer src="{% static 'vendor/fontawesome-free-5.11.2-web/js/solid.min.js' %}"></script>
-            <script defer src="{% static 'vendor/fontawesome-free-5.11.2-web/js/brand.min.js' %}"></script>
-          {% endcompress %}
-        {% endif %}
+      {% compress js %}
+        <script defer src="{% static 'vendor/fontawesome-free-5.11.2-web/js/solid.min.js' %}"></script>
+        <script defer src="{% static 'vendor/fontawesome-free-5.11.2-web/js/brands.min.js' %}"></script>
+      {% endcompress %}
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
