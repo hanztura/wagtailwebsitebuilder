@@ -7,13 +7,15 @@
         {% for item in value.toc_items|json_to_object %}
           <li>
             <a href="{{ item.link }}">{{ item.text }}</a>
-            {% if item.items %}
-              {% for subItem in item.items %}
-                <li>
-                  <a href="{{ subItem.link }}">{{ subItem.text }}</a>
-                </li>
-              {% endfor %}
-            {% endif %}
+            <ul>
+              {% if item.items %}
+                {% for subItem in item.items %}
+                  <li>
+                    <a href="{{ subItem.link }}">{{ subItem.text }}</a>
+                  </li>
+                {% endfor %}
+              {% endif %}
+            </ul>
           </li>
           
         {% endfor %}
