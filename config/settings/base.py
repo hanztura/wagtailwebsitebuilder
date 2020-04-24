@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'wagtail.admin',
     'wagtail.core',
     'wagtail.contrib.settings',
+    'wagtail_lazyimages',
 
     'wagtail.contrib.table_block',
     'wagtail.contrib.sitemaps',

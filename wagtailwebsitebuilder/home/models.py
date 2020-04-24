@@ -14,7 +14,7 @@ from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtailmetadata.models import MetadataPageMixin
 
 from .db import CSSMixin
-from .helpers import json2obj, TocBlock
+from .helpers import TocBlock, CustomImageBlock
 from puputextension.helpers import CodeBlock
 
 
@@ -82,7 +82,8 @@ class HomePage(CSSMixin, MetadataPageMixin, Page):
             ],
         })),
         ('code', CodeBlock()),
-        ('image', ImageChooserBlock())
+        ('image', ImageChooserBlock()),
+        ('custom_image', CustomImageBlock()),
     ])
     navbar_icon = models.ForeignKey(
         'wagtailimages.Image',

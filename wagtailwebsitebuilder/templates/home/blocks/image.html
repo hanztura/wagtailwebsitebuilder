@@ -1,0 +1,9 @@
+{% load wagtailcore_tags lazyimages_tags sekizai_tags %}
+
+<figure class="image {{ value.css_class }}">
+  {% if value.is_rounded %}
+    {% lazy_image value.image max-1280x720 class="lazy is-rounded" %}
+  {% else %}
+    {% lazy_image value.image max-1280x720 class="lazy" %}
+  {% endif %}
+</figure>
