@@ -1,4 +1,4 @@
-{% load static wagtailuserbar meta compress %}
+{% load static wagtailuserbar meta compress sekizai_tags %}
 
 <!DOCTYPE html>
 <html class="no-js has-navbar-fixed-top" lang="en">
@@ -58,10 +58,13 @@
         {% block footer %}{% endblock footer %}
         {# Global javascript #}
 
-      {% compress js %}
-        <script defer src="{% static 'vendor/fontawesome-free-5.11.2-web/js/solid.min.js' %}"></script>
-        <script defer src="{% static 'vendor/fontawesome-free-5.11.2-web/js/brands.min.js' %}"></script>
-      {% endcompress %}
+          {% addtoblock 'js' %}
+            <script defer src="{% static 'vendor/fontawesome-free-5.11.2-web/js/solid.min.js' %}"></script>
+            <script defer src="{% static 'vendor/fontawesome-free-5.11.2-web/js/brands.min.js' %}"></script>
+          {% endaddtoblock %}
+
+        {% render_block "js" postprocessor "compressor.contrib.sekizai.compress" %}
+
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}

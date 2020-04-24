@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags compress %}
+{% load static wagtailcore_tags wagtailimages_tags compress sekizai_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
@@ -132,23 +132,44 @@
       </div>
     </section>
   </main>
-{% endblock base_content %}
 
-{% block extra_js %}
+{% addtoblock "js" %}
   {% if debug %}
     <script src="{% static 'vendor/vue/vue.js' %}" defer></script>
-    <script src="{% static 'vendor/axios.min.js' %}" defer></script>
-    <script src="{% static 'vendor/vue-recaptcha.js' %}" defer></script>
   {% else %}
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js" defer></script>
+  {% endif %}
+{% endaddtoblock %}
+
+{% addtoblock "js" %}
+  {% if debug %}
+    <script src="{% static 'vendor/axios.min.js' %}" defer></script>
+  {% else %}
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+  {% endif %}
+{% endaddtoblock %}
+
+{% addtoblock "js" %}
+  {% if debug %}
+    <script src="{% static 'vendor/vue-recaptcha.js' %}" defer></script>
+  {% else %}
     <script src="https://unpkg.com/vue-recaptcha@latest/dist/vue-recaptcha.min.js" defer></script>
   {% endif %}
+{% endaddtoblock %}
 
-  {% compress js %}
+{% addtoblock "js" %}
     <script src="{% static "home/navBarApp.js" %}" defer></script>
+{% endaddtoblock %}
+
+{% addtoblock "js" %}
     <script src="{% static "js/toc.js" %}" defer></script>
+{% endaddtoblock %}
+
+{% addtoblock "js" %}
     <script src="{% static "home/componentModal.js" %}" defer></script>
+{% endaddtoblock %}
+
+{% addtoblock "js" %}
     <script src="{% static "ajax_contact_forms/contactFormApp.js" %}" defer></script>
-  {% endcompress %}
-{% endblock extra_js %}
+{% endaddtoblock %}
+{% endblock base_content %}

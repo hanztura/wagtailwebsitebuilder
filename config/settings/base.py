@@ -67,7 +67,7 @@ INSTALLED_APPS = [
 
     'admin_honeypot',
     'django_extensions',
-    # 'sekizai',
+    'sekizai',
     'compressor',
     'meta',
     'wagtailmetadata',
@@ -108,6 +108,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'wagtail.contrib.settings.context_processors.settings',
                 'home.context_processors.get_google_analytics',
+                'sekizai.context_processors.sekizai',
             ],
         },
     },
