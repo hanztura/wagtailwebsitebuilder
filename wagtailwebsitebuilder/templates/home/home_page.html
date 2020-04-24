@@ -120,30 +120,38 @@
   </main>
 
   {% addtoblock "js_first" %}
+    {% if debug %}
       <script src="{% static 'vendor/vue/vue.js' %}" defer></script>
+    {% else %}
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js" defer></script>
+    {% endif %}
   {% endaddtoblock %}
 
-  {% addtoblock "js_first" %}
+  {% addtoblock "js" %}
+    {% if debug %}
       <script src="{% static 'vendor/axios.min.js' %}" defer></script>
+    {% else %}
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+    {% endif %}
   {% endaddtoblock %}
 
-  {% addtoblock "js_first" %}
+  {% addtoblock "js" %}
       <script src="{% static "home/navBarApp.js" %}" defer></script>
   {% endaddtoblock %}
 
-  {% addtoblock "js_first" %}
+  {% addtoblock "js" %}
       <script src="{% static "js/toc.js" %}" defer></script>
   {% endaddtoblock %}
 
-  {% addtoblock "js_first" %}
+  {% addtoblock "js" %}
       <script src="{% static "home/componentModal.js" %}" defer></script>
   {% endaddtoblock %}
 
-  {% addtoblock "js_first" %}
+  {% addtoblock "js" %}
       <script src="{% static "ajax_contact_forms/contactFormApp.js" %}" defer></script>
   {% endaddtoblock %}
 
-  {% addtoblock "js_first" %}
+  {% addtoblock "js" %}
       <script src="{% static 'js/lazyLoader.js' %}" defer></script>
   {% endaddtoblock %}
 {% endblock base_content %}
