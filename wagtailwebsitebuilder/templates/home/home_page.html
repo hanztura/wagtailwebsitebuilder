@@ -119,31 +119,31 @@
     </section>
   </main>
 
-  {% addtoblock "js" %}
+  {% addtoblock "js_first" %}
       <script src="{% static 'vendor/vue/vue.js' %}" defer></script>
   {% endaddtoblock %}
 
-  {% addtoblock "js" %}
+  {% addtoblock "js_first" %}
       <script src="{% static 'vendor/axios.min.js' %}" defer></script>
   {% endaddtoblock %}
 
-  {% addtoblock "js" %}
+  {% addtoblock "js_first" %}
       <script src="{% static "home/navBarApp.js" %}" defer></script>
   {% endaddtoblock %}
 
-  {% addtoblock "js" %}
+  {% addtoblock "js_first" %}
       <script src="{% static "js/toc.js" %}" defer></script>
   {% endaddtoblock %}
 
-  {% addtoblock "js" %}
+  {% addtoblock "js_first" %}
       <script src="{% static "home/componentModal.js" %}" defer></script>
   {% endaddtoblock %}
 
-  {% addtoblock "js" %}
+  {% addtoblock "js_first" %}
       <script src="{% static "ajax_contact_forms/contactFormApp.js" %}" defer></script>
   {% endaddtoblock %}
 
-  {% addtoblock "js" %}
+  {% addtoblock "js_first" %}
       <script src="{% static 'js/lazyLoader.js' %}" defer></script>
   {% endaddtoblock %}
 {% endblock base_content %}
