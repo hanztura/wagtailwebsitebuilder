@@ -134,27 +134,15 @@
   </main>
 
 {% addtoblock "js" %}
-  {% if debug %}
     <script src="{% static 'vendor/vue/vue.js' %}" defer></script>
-  {% else %}
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js" defer></script>
-  {% endif %}
 {% endaddtoblock %}
 
 {% addtoblock "js" %}
-  {% if debug %}
     <script src="{% static 'vendor/axios.min.js' %}" defer></script>
-  {% else %}
-    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
-  {% endif %}
 {% endaddtoblock %}
 
 {% addtoblock "js" %}
-  {% if debug %}
     <script src="{% static 'vendor/vue-recaptcha.js' %}" defer></script>
-  {% else %}
-    <script src="https://unpkg.com/vue-recaptcha@latest/dist/vue-recaptcha.min.js" defer></script>
-  {% endif %}
 {% endaddtoblock %}
 
 {% addtoblock "js" %}
