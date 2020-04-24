@@ -1,9 +1,7 @@
 let contactForm = new Vue({
   name: 'ContactFormApp',
   el: '#contactForm',
-  components: {
-    'vue-recaptcha': VueRecaptcha,
-  },
+  delimiters: ['[[', ']]'],
   data: () => {
     return {
       name: '',
@@ -14,14 +12,71 @@ let contactForm = new Vue({
       recaptcha: '',
       recaptchaRequired: false,
       showThankYouModal: false,
+      randomWords: [
+        'offense',
+        'choice',
+        'voyage',
+        'radiation',
+        'to',
+        'dynamic',
+        'creation',
+        'courtship',
+        'sense',
+        'cooperation',
+        'serve',
+        'lodge',
+        'disappear',
+        'slippery',
+        'pray',
+        'absolute',
+        'sun',
+        'rise',
+        'flexible',
+        'means',
+        'coup',
+        'taste',
+        'pawn',
+        'Bible',
+        'nuclear',
+        'discover',
+        'fit',
+        'irony',
+        'shaft',
+        'driver',
+        'broccoli',
+        'interrupt',
+        'part',
+        'contact',
+        'path',
+        'executive',
+        'banner',
+        'reality',
+        'sentiment',
+        'redundancy',
+        'imposter',
+        'descent',
+        'damn',
+        'frozen',
+        'throne',
+        'psychology',
+        'reference',
+        'incongruous',
+        'will',
+        'tolerate',
+      ],
+      randomWord: '',
+      customCaptcha: '',
     }
   },
   computed: {
     showRecaptchaHelp: function () {
-      return this.recaptcha ? false : true;
+      return this.randomWord == this.customCaptcha && this.customCaptcha != '' ? false : true;
     }
   },
   methods: {
+    setRandomWord: function () {
+      this.randomWord = this.randomWords[Math.floor(Math.random() * this.randomWords.length)];
+    },
     closeModal: function () {
       this.showThankYouModal = false;
       console.log('close modal')
@@ -31,29 +86,13 @@ let contactForm = new Vue({
       return csrf;
     },
 
-    onVerify: function (response) {
-      this.recaptcha = response;
-      this.recaptchaRequired = false;
-    },
-
-    onExpired: function () {
-      console.log('recaptcha expired');
-      this.resetRecaptcha();
-    },
-
-    resetRecaptcha: function () {
-      this.$refs.recaptcha.reset();
-      this.recaptchaRequired = false;
-    },
-
     sendContactForm: function(e) {
-      this.$refs.recaptcha.execute();
 
-      if (this.recaptcha) {
+      if (!this.showRecaptchaHelp) {
         // disable sending
         this.enableSending = false;
-
-        let url = e.target.action;
+        let form = e.target;
+        let url = form.action;
         let data = {
           sender_message: this.message,
           sender_email: this.emailAddress,
@@ -69,18 +108,21 @@ let contactForm = new Vue({
             }
           })
         .then((response) => {
-            _this.showThankYouModal = true;
-          })
+          form.reset();
+          _this.showThankYouModal = true;
+          setTimeout(() => { _this.enableSending = true; }, 30000);
+        })
         .catch((error) => {
             console.log(error);
+            _this.enableSending = true
           })
-        .finally((e) => {
-          _this.enableSending = true;
-        })
       } else {
         // recaptcha is needed
         this.recaptchaRequired = true;
       }
     }
+  },
+  mounted() {
+    this.setRandomWord();
   }
 });

@@ -3,22 +3,13 @@
 
 {% block body_class %}template-homepage{% endblock %}
 
-{% block extra_css %}
-  <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" defer>
-  </script>  
-{% endblock extra_css %}
-
 {% block global_css %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/code.css' %}">
   {% with primary=settings.multisite.SiteBranding.primary_color secondary=settings.multisite.SiteBranding.secondary_color accent=settings.multisite.SiteBranding.accent_color accent_2=settings.multisite.SiteBranding.accent_2_color %}
     <style>
-      .site-background-primary {
-        background-color: {{ primary }} !important;
-      }
-      .site-text-secondary {
-        color: {{ secondary }} !important;
-      }
-    </style> 
+      .site-background-primary { background-color: {{ primary }} !important; }
+      .site-text-secondary { color: {{ secondary }} !important; }
+    </style>
   {% endwith %}
   {% if page.css_url %}
       <link rel="stylesheet" type="text/css" href="{{ page.css_url }}">
@@ -84,39 +75,34 @@
             <div class="field">
               <label class="label">Message</label>
               <div class="control">
-                <textarea class="textarea" v-model="message" required placeholder="Message"></textarea>
+                <textarea class="textarea" v-model="message" required placeholder="Message" :disabled="!enableSending"></textarea>
               </div>
             </div>
 
             <div class="field">
               <label class="label">Email Address</label>
               <div class="control">
-                <input class="input" type="email" v-model="emailAddress" required placeholder="john@domain.com">
+                <input class="input" type="email" v-model="emailAddress" required placeholder="john@domain.com" :disabled="!enableSending">
               </div>
             </div>
 
             <div class="field">
               <label class="label">Name</label>
               <div class="control">
-                <input class="input" type="text" v-model="name" placeholder="Your name is optional">
+                <input class="input" type="text" v-model="name" placeholder="Your name is optional" :disabled="!enableSending">
               </div>
             </div>
 
             <div class="field">
+              <label class="label">asfasfaswqr<span class="has-text-link">[[ randomWord ]]</span>wrasdfasfd</label>
               <div class="control">
-                <template>
-                  <vue-recaptcha
-                    ref="recaptcha"
-                    :sitekey="recaptchaSiteKey"
-                    size="invisible"
-                    @verify="onVerify"
-                    @expired="onExpired"></vue-recaptcha>
-                </template>
+                <input :class="{'input': true, 'is-danger': showRecaptchaHelp }" type="text" ref="customCaptcha" v-model="customCaptcha" placeholder="Highlighted word" :required="showRecaptchaHelp">
               </div>
               <p
                 :class="{'help': true, 'is-danger': showRecaptchaHelp }"
                 v-show="showRecaptchaHelp">Help X of Y prevent spams. Thank you for your understanding <3.</p>
             </div>
+
             <div class="field">
               <div class="control">
                 <button class="button has-background-link is-fullwidth" :disabled="!enableSending">Submit</button>
@@ -139,10 +125,6 @@
 
   {% addtoblock "js" %}
       <script src="{% static 'vendor/axios.min.js' %}" defer></script>
-  {% endaddtoblock %}
-
-  {% addtoblock "js" %}
-      <script src="{% static 'vendor/vue-recaptcha.js' %}" defer></script>
   {% endaddtoblock %}
 
   {% addtoblock "js" %}
