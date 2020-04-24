@@ -1,6 +1,6 @@
 {% load wagtailcore_tags lazyimages_tags sekizai_tags %}
 
-<figure class="image {{ value.css_class }}">
+<figure class="{% if value.css_class %}image {{ value.css_class }}{% endif %}">
   {% if value.is_rounded %}
     {% lazy_image value.image original class="lazy is-rounded" %}
   {% else %}
