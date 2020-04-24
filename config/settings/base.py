@@ -67,6 +67,7 @@ INSTALLED_APPS = [
 
     'admin_honeypot',
     'django_extensions',
+    # 'sekizai',
     'compressor',
     'meta',
     'wagtailmetadata',
