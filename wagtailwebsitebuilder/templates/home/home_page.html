@@ -55,14 +55,7 @@
   </header>
 
   <main class="content">
-    <section
-      class="hero is-medium is-bold site-background-primary">
-      <div class="hero-body">
-        <div class="container">
-            <h1 class="title site-text-secondary">{{self.title}}</h1>
-        </div>
-      </div>
-    </section>
+    {% include_block page.hero  %}
 
     <section class="section">
       <div class="container">

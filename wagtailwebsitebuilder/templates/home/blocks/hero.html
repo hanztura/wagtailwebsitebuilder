@@ -1,0 +1,22 @@
+<section class="hero {{ value.hero_class }}">
+  <div class="hero-body">
+    <div class="container">
+
+      <{{ value.title_tag }} class="title">
+        {{ value.title }}
+      </{{ value.title_tag }}>
+
+      {% if value.subtitle %}
+        <p class="subtitle">
+          {{ value.subtitle }}
+        </p>
+      {% endif %}
+
+      {% if value.cta_text and value.cta_href %}
+        <p>
+          <a class="button is-link" href="{{ value.cta_href }}">{{ value.cta_text }}</a>
+        </p>
+      {% endif %}
+    </div>
+  </div>
+</section>

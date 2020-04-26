@@ -14,6 +14,7 @@ from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtailmetadata.models import MetadataPageMixin
 
 from .db import CSSMixin
+from .blocks import HeroBlock, CustomRichTextBlock
 from .helpers import TocBlock, CustomImageBlock
 from puputextension.helpers import CodeBlock
 
@@ -48,16 +49,16 @@ class HomePageNavBarItem(Orderable, models.Model):
 
 
 class HomePage(CSSMixin, MetadataPageMixin, Page):
+    hero = StreamField([
+        ('hero', HeroBlock()),
+    ], null=True, blank=True)
     body = StreamField([
-        ('with_id', blocks.StructBlock(
-            [
-                ('id', blocks.CharBlock()),
-                ('paragraph', blocks.RichTextBlock()),
-            ],
-            template='home/blocks/with_id.html'
-        )),
+        ('code', CodeBlock()),
+        ('custom_image', CustomImageBlock()),
+        ('custom_paragraph', CustomRichTextBlock()),
+        ('html', blocks.RawHTMLBlock()),
+        ('image', ImageChooserBlock()),
         ('paragraph', blocks.RichTextBlock()),
-        ('toc', TocBlock()),
         ('table', TableBlock(table_options={
             'minSpareRows': 0,
             'startRows': 3,
@@ -81,9 +82,14 @@ class HomePage(CSSMixin, MetadataPageMixin, Page):
                 'alignment',
             ],
         })),
-        ('code', CodeBlock()),
-        ('image', ImageChooserBlock()),
-        ('custom_image', CustomImageBlock()),
+        ('toc', TocBlock()),
+        ('with_id', blocks.StructBlock(
+            [
+                ('id', blocks.CharBlock()),
+                ('paragraph', blocks.RichTextBlock()),
+            ],
+            template='home/blocks/with_id.html'
+        )),
     ])
     navbar_icon = models.ForeignKey(
         'wagtailimages.Image',
@@ -99,6 +105,7 @@ class HomePage(CSSMixin, MetadataPageMixin, Page):
         ImageChooserPanel('navbar_icon'),
         InlinePanel('navbar_items', label='Navbar Items'),
         FieldPanel('css', classname='full'),
+        StreamFieldPanel('hero', classname='full'),
         StreamFieldPanel('body', classname='full'),
     ]
 
