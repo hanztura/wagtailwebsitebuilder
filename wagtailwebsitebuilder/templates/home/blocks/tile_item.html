@@ -1,0 +1,23 @@
+{% load wagtailcore_tags %}
+
+<div class="tile {{ value.css_class }} is-vertical">
+  {% if value.image %}
+    {% include_block value.image %}
+  {% endif %}
+  
+  <p class="title has-text-centered">{{ value.title }}</p>
+
+  {% if value.subtitle %}
+    <p class="subtitle">{{ value.subtitle }}</p>    
+  {% endif %}
+
+
+  {% if value.body %}
+    <div class="content">{% include_block value.body %}</div>
+  {% endif %}
+
+
+  {% if value.html %}
+    {% include_block value.html %}
+  {% endif %}
+</div>

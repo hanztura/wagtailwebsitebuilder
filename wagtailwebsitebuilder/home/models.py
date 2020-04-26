@@ -14,7 +14,7 @@ from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtailmetadata.models import MetadataPageMixin
 
 from .db import CSSMixin
-from .blocks import HeroBlock, CustomRichTextBlock
+from .blocks import HeroBlock, CustomRichTextBlock, TileStreamBlock
 from .helpers import TocBlock, CustomImageBlock
 from puputextension.helpers import CodeBlock
 
@@ -82,6 +82,7 @@ class HomePage(CSSMixin, MetadataPageMixin, Page):
                 'alignment',
             ],
         })),
+        ('tile', TileStreamBlock()),
         ('toc', TocBlock()),
         ('with_id', blocks.StructBlock(
             [
