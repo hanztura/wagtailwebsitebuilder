@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'compressor',
     'meta',
     'wagtailmetadata',
+    'wagtailschemaorg',
 
     'ajax_contact_forms',
     'puputextension',
