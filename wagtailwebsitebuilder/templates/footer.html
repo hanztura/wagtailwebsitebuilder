@@ -1,6 +1,6 @@
 <footer class="footer has-background-primary">
   <nav class="content has-text-centered">
-    <p>
+    <p class="has-text-link">
       <span class="px-2">© {% now "Y" %} {{ request.site.site_name }}</span> 
     {% for link in settings.multisite.FooterLinks.footer_links.all %}
         <span class="px-4">&nbsp|&nbsp</span> <a href="{{ link.link }}">{{ link.title }}</a>
