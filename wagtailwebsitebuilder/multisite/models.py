@@ -11,6 +11,11 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.admin.edit_handlers import (
     FieldPanel, InlinePanel, PageChooserPanel, MultiFieldPanel)
 from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtailschemaorg.models import BaseLDSetting
+from wagtailschemaorg.registry import register_site_thing
+from wagtailschemaorg.utils import extend
+
+from home.schemas import Organization, PostalAddress
 
 # The LinkFields and RelatedLink meta-models
 # are taken from the WagtailDemoimplementation.
@@ -76,6 +81,56 @@ class SocialMediaSettings(BaseSetting):
         null=True,
         blank=True
     )
+
+
+@register_setting
+@register_site_thing
+class Organisation(BaseLDSetting):
+    """Details about this organisation"""
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    address_country = models.CharField(max_length=100)
+    address_city = models.CharField(max_length=100)
+    address_region = models.CharField(max_length=100)
+    address_postal_code = models.CharField(max_length=50)
+    address_street = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=20)
+    email = models.EmailField()
+    twitter_handle = models.CharField(max_length=15)
+    facebook_url = models.URLField()
+
+    @property
+    def schema_address(self):
+        address = PostalAddress(
+            address_country=self.address_country,
+            address_locality=self.address_city,
+            address_region=self.address_region,
+            postal_code=self.address_postal_code,
+            street_address=self.address_street,
+            name=self.name,
+            description='address of {}'.format(self.name),
+        )
+        return address
+
+    @property
+    def schema(self):
+        return Organization(
+            self.schema_address,
+            self.email,
+            self.phone_number,
+            [
+                self.twitter_url, self.facebook_url
+            ],
+            self.name,
+            self.description
+        )
+
+    def ld_entity(self):
+        return extend(super().ld_entity(), self.schema.as_python_dict)
+
+    @property
+    def twitter_url(self):
+        return 'https://twitter.com/' + self.twitter_handle
 
 
 @register_setting

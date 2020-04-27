@@ -5,6 +5,7 @@ __pycache__/
 db.sqlite3
 local.sqlite3
 test.sqlite3
+temp.py
 media/
 db/
 *.sass-cache/

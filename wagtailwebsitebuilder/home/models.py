@@ -13,11 +13,15 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtailmetadata.models import MetadataPageMixin
+from wagtailschemaorg.models import PageLDMixin
+from wagtailschemaorg.utils import extend
 
 from .db import CSSMixin
 from .blocks import (
     HeroBlock, CustomRichTextBlock, TileStreamBlock, ColumnsBlock, CardBlock)
 from .helpers import TocBlock, CustomImageBlock
+from .schemas import WebContent, Thing, Person
+from multisite.models import Organisation
 from puputextension.helpers import CodeBlock
 
 
@@ -50,7 +54,7 @@ class HomePageNavBarItem(Orderable, models.Model):
     ]
 
 
-class HomePage(CSSMixin, MetadataPageMixin, Page):
+class HomePage(PageLDMixin, CSSMixin, MetadataPageMixin, Page):
     hero = StreamField([
         ('hero', HeroBlock()),
     ], null=True, blank=True)
@@ -115,6 +119,32 @@ class HomePage(CSSMixin, MetadataPageMixin, Page):
     ]
 
     promote_panels = Page.promote_panels + MetadataPageMixin.panels
+
+    def ld_entity(self):
+        site = self.get_site()
+        about = Thing(
+            name=self.title,
+            description=self.search_description,
+            url=self.get_url(),
+        )
+        org = Organisation.for_site(site)
+        author = Person(
+            address=org.schema_address,
+            email=self.owner.email,
+            affiliation=org.schema,
+            name=self.owner.get_full_name(),
+            description='')
+        web_content = WebContent(
+            about=about,
+            author=author,
+            date_published=str(self.first_published_at),
+            date_modified=str(self.last_published_at),
+            text=str(self.body),
+            name=self.title,
+            description=about.description,
+            url=about.url
+        )
+        return web_content.as_python_dict
 
 
 class SitemapPage(MetadataPageMixin, Page):
