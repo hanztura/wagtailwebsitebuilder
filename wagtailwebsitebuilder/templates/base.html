@@ -41,6 +41,8 @@
         
         {# Global stylesheets #}
         {% block global_css %}
+
+          {% addtoblock 'css' %}
             {% with settings.multisite.SiteBranding.css as site_css %}
                 {% if site_css %}
                     <link rel="preload" as="style" href="{{ site_css.url }}" onload="this.onload=null;this.rel='stylesheet'">     
@@ -50,6 +52,7 @@
                     <noscript><link rel="stylesheet" href="{% static 'css/bulma-0.8.0/css/bulma.min.css' %}"></noscript>
                 {% endif %}
             {% endwith %}
+          {% endaddtoblock %}
         {% endblock global_css %}
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">

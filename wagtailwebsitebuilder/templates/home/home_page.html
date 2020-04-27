@@ -19,6 +19,14 @@
 {% endblock global_css %}
 
 {% block base_content %}
+
+
+  {% addtoblock 'css' %}
+    <style>
+      .is-full-height { height: 100% !important;  }
+    </style>
+  {% endaddtoblock %}
+
   <header>
     <nav id="navBar" class="navbar is-fixed-top has-background-primary" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
