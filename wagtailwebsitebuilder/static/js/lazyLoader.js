@@ -3,8 +3,13 @@ const io = new IntersectionObserver((entries) =>
         // set image source only when it is in the viewport
         if (entry.isIntersecting) {
             const image = entry.target;
-            // setting image source from the dataset
-            image.src = image.dataset.src;
+
+            if (image.className.indexOf('hero') >= 0) {
+                image.style.backgroundImage = `url(${image.dataset.src})`
+            } else {
+                // setting image source from the dataset
+                image.src = image.dataset.src;
+            }
 
             // when image is loaded, we do not need to observe it any more
             io.unobserve(image);

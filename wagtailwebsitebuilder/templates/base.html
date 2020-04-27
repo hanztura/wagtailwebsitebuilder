@@ -63,7 +63,9 @@
 
         {% block base_content %}{% endblock %}
 
-        {% block footer %}{% endblock footer %}
+        {% block footer %}
+            {% include "footer.html" %}
+        {% endblock footer %}
         {# Global javascript #}
 
 

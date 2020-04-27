@@ -20,6 +20,7 @@ class HeroBlock(blocks.StructBlock):
     hero_class = blocks.CharBlock(required=False)
     cta_text = blocks.CharBlock(required=False)
     cta_href = blocks.CharBlock(required=False, default='#')
+    background_image = ImageChooserBlock(required=False)
 
     class Meta:
         template = 'home/blocks/hero.html'

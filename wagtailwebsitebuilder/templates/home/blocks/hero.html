@@ -1,4 +1,11 @@
-<section class="hero {{ value.hero_class }}">
+{% load lazyimages_tags %}
+
+{% if value.background_image %}
+  {% lazy_image value.background_image original as img %}
+{% endif %}
+<section
+  class="hero {{ value.hero_class }} {% if value.background_image %}lazy{% endif %}"
+  {% if value.background_image %}data-src="{{ img.url }}" style="background-image: url({{ img.lazy_url }}); background-position: center;"{% endif %}>
   <div class="hero-body">
     <div class="container">
 
