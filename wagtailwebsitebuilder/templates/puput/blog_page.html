@@ -1,6 +1,6 @@
 {% extends "puput/base.html" %}
 
-{% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share %}
+{% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share lazyimages_tags %}
 
 {% block title %}
     {% if search_term %}
@@ -27,7 +27,7 @@
 {% endblock meta_description %}
 
 {% block social_share %}
-    {% image blog_page.header_image fill-800x450 as share_image %}
+    {% lazy_image blog_page.header_image fill-800x450 format-webp as share_image %}
     <meta property="og:title" content="{{ blog_page.title }}" />
     <meta property="og:description" content="{{ blog_page.description }}" />
     <meta property="og:url" content="{% canonical_url %}" />
@@ -56,8 +56,8 @@
                 <section>
                     {% if entry.header_image %}
                         <span class="img-responsive">
-                            {% image entry.header_image fill-800x240 as header_image %}
-                            <img alt="{{ entry.header_image.title }}" src="{{ header_image.url }}">
+                            {% lazy_image entry.header_image fill-800x240 format-webp as header_image %}
+                            <img class="lazy" alt="{{ entry.header_image.title }}" src="{{ header_image.lazy_url }}" data-src="{{ header_image.url}}">
                         </span>
                     {% endif %}
                     {% include 'puput/entry_links.html' %}

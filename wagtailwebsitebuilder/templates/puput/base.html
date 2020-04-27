@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static i18n wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags wagtailuserbar puput_tags compress %}
+{% load static i18n wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags wagtailuserbar puput_tags compress sekizai_tags %}
 
 {% block title %}
     {{ blog_page.title }}
@@ -212,4 +212,8 @@
   {% compress js %}
     <script src="{% static "home/navBarApp.js" %}"></script>
   {% endcompress %}
+
+  {% addtoblock "js" %}
+      <script src="{% static 'js/lazyLoader.js' %}" defer></script>
+  {% endaddtoblock %}
 {% endblock extra_js %}
