@@ -4,6 +4,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (
     FieldPanel, InlinePanel, StreamFieldPanel)
 from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail.contrib.sitemaps.sitemap_generator import Sitemap
 from wagtail.core import blocks
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page, Orderable
@@ -114,3 +115,31 @@ class HomePage(CSSMixin, MetadataPageMixin, Page):
     ]
 
     promote_panels = Page.promote_panels + MetadataPageMixin.panels
+
+
+class SitemapPage(MetadataPageMixin, Page):
+    hero = StreamField([
+        ('hero', HeroBlock()),
+    ], null=True, blank=True)
+    body = StreamField([
+        ('custom_paragraph', CustomRichTextBlock()),
+        ('html', blocks.RawHTMLBlock()),
+    ])
+    navbar_icon = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        related_name='+',
+        null=True)
+
+    content_panels = Page.content_panels + [
+        ImageChooserPanel('navbar_icon'),
+        StreamFieldPanel('hero', classname='full'),
+        StreamFieldPanel('body', classname='full'),
+    ]
+
+    promote_panels = Page.promote_panels + MetadataPageMixin.panels
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['root_page'] = Sitemap(request).items().first()
+        return context
