@@ -2,8 +2,8 @@
 
 <figure class="{% if value.css_class %}image {{ value.css_class }}{% endif %}">
   {% if value.is_rounded %}
-    {% lazy_image value.image original format-png class="lazy is-rounded" %}
+    {% lazy_image value.image original format-webp class="lazy is-rounded" %}
   {% else %}
-    {% lazy_image value.image original format-png class="lazy" %}
+    {% lazy_image value.image original format-webp class="lazy" %}
   {% endif %}
 </figure>

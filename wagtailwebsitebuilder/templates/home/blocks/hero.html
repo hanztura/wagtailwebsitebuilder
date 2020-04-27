@@ -1,7 +1,7 @@
 {% load lazyimages_tags %}
 
 {% if value.background_image %}
-  {% lazy_image value.background_image original format-png as img %}
+  {% lazy_image value.background_image original format-webp as img %}
 {% endif %}
 <section
   class="hero {{ value.hero_class }} {% if value.background_image %}lazy{% endif %}"

@@ -4,18 +4,24 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block global_css %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/code.css' %}">
-  {% with primary=settings.multisite.SiteBranding.primary_color secondary=settings.multisite.SiteBranding.secondary_color accent=settings.multisite.SiteBranding.accent_color accent_2=settings.multisite.SiteBranding.accent_2_color %}
-    <style>
-      .site-background-primary { background-color: {{ primary }} !important; }
-      .site-text-secondary { color: {{ secondary }} !important; }
-    </style>
-  {% endwith %}
-  {% if page.css_url %}
-      <link rel="stylesheet" type="text/css" href="{{ page.css_url }}">
-  {% else %}
-    {{ block.super }}
-  {% endif %}
+
+  {% addtoblock 'css' %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/code.css' %}">
+    {% with primary=settings.multisite.SiteBranding.primary_color secondary=settings.multisite.SiteBranding.secondary_color accent=settings.multisite.SiteBranding.accent_color accent_2=settings.multisite.SiteBranding.accent_2_color %}
+      <style>
+        .site-background-primary { background-color: {{ primary }} !important; }
+        .site-text-secondary { color: {{ secondary }} !important; }
+      </style>
+    {% endwith %}
+  {% endaddtoblock %}
+
+  {% addtoblock 'css' %}
+    {% if page.css_url %}
+        <link rel="stylesheet" type="text/css" href="{{ page.css_url }}">
+    {% else %}
+      {{ block.super }}
+    {% endif %}
+  {% endaddtoblock %}
 {% endblock global_css %}
 
 {% block base_content %}
