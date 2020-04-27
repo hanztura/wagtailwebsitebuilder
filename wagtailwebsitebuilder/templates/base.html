@@ -67,7 +67,19 @@
         {% block base_content %}{% endblock %}
 
         {% block footer %}
-            {% include "footer.html" %}
+            <footer class="footer has-background-primary">
+              <nav class="content has-text-centered">
+
+                {% block footer_start %}{% endblock footer_start %}
+                
+                <p class="has-text-link">
+                  <span class="px-2">© {% now "Y" %} {{ request.site.site_name }}</span> 
+                {% for link in settings.multisite.FooterLinks.footer_links.all %}
+                    <span class="px-4">&nbsp|&nbsp</span> <a href="{{ link.link }}">{{ link.title }}</a>
+                {% endfor %}
+                </p>
+              </nav>
+            </footer>
         {% endblock footer %}
         {# Global javascript #}
 

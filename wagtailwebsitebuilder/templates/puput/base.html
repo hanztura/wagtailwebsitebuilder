@@ -183,19 +183,13 @@
   </main>
 {% endblock base_content %}
 
-{% block footer %}
-  <footer class="footer site-background-primary">
-    <div class="content has-text-centered">
-        <div class="copy">
-            <p>
-                Powered by <a href="http://www.djangoproject.com" rel="nofollow">Django</a>,
-                <a href="http://www.wagtail.io" rel="nofollow">Wagtail</a> and
-                <a href="http://github.com/APSL/puput" rel="nofollow">Puput</a>
-            </p>
-        </div>
-    </div>
-  </footer>  
-{% endblock footer %}
+{% block footer_start %}
+  <p>
+      Powered by <a href="http://www.djangoproject.com" rel="nofollow">Django</a>,
+      <a href="http://www.wagtail.io" rel="nofollow">Wagtail</a> and
+      <a href="http://github.com/APSL/puput" rel="nofollow">Puput</a>
+  </p>
+{% endblock footer_start %}
 
 {% block extra_js %}
   {% compress js %}
