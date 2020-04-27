@@ -3,6 +3,11 @@
 
 {% block body_class %}template-homepage{% endblock %}
 
+
+{% block other_metas %}
+    <link rel="canonical" href="{{ page.get_url }}"/>
+{% endblock %}
+
 {% block global_css %}
 
   {% addtoblock 'css' %}
