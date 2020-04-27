@@ -5,7 +5,8 @@ const io = new IntersectionObserver((entries) =>
             const image = entry.target;
 
             if (image.className.indexOf('hero') >= 0) {
-                image.style.backgroundImage = `url(${image.dataset.src})`
+                image.style.backgroundImage = `url(${image.dataset.src})`;
+                image.className.indexOf('overlay') >= 0 ? image.style.backgroundBlendMode = 'overlay': false;
             } else {
                 // setting image source from the dataset
                 image.src = image.dataset.src;
