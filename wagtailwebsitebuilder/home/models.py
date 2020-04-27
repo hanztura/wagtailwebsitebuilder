@@ -14,7 +14,8 @@ from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtailmetadata.models import MetadataPageMixin
 
 from .db import CSSMixin
-from .blocks import HeroBlock, CustomRichTextBlock, TileStreamBlock
+from .blocks import (
+    HeroBlock, CustomRichTextBlock, TileStreamBlock, ColumnsBlock, CardBlock)
 from .helpers import TocBlock, CustomImageBlock
 from puputextension.helpers import CodeBlock
 
@@ -53,7 +54,9 @@ class HomePage(CSSMixin, MetadataPageMixin, Page):
         ('hero', HeroBlock()),
     ], null=True, blank=True)
     body = StreamField([
+        ('card', CardBlock()),
         ('code', CodeBlock()),
+        ('columns', ColumnsBlock()),
         ('custom_image', CustomImageBlock()),
         ('custom_paragraph', CustomRichTextBlock()),
         ('html', blocks.RawHTMLBlock()),

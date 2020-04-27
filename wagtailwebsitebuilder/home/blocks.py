@@ -91,3 +91,51 @@ class TileStreamBlock(blocks.StreamBlock):
 
     class Meta:
         template = 'home/blocks/tile.html'
+
+
+class CardBlock(blocks.StructBlock):
+    image = CustomImageBlock(required=False)
+    content = blocks.StreamBlock(
+        [
+            ('paragraph', CustomRichTextBlock()),
+            ('html', blocks.RawHTMLBlock()),
+        ]
+    )
+    css_class = blocks.CharBlock(required=False)
+
+    class Meta:
+        template = 'home/blocks/card.html'
+
+
+class ColumnBlock(blocks.StructBlock):
+    body = blocks.StreamBlock(
+        [
+            ('card', CardBlock()),
+            ('html', blocks.RawHTMLBlock()),
+            ('paragraph', CustomRichTextBlock()),
+        ]
+    )
+    css_class = blocks.CharBlock(required=False)
+
+    class Meta:
+        template = 'home/blocks/column.html'
+
+
+class ColumnsBlock(blocks.StructBlock):
+    columns = blocks.StreamBlock(
+        [
+            ('column', ColumnBlock())
+        ]
+    )
+    css_class = blocks.CharBlock(required=False)
+    container_tag = blocks.ChoiceBlock(
+        default='section',
+        choices=(
+            ('article', 'article'),
+            ('div', 'div'),
+            ('nav', 'nav'),
+            ('section', 'section'),
+        ))
+
+    class Meta:
+        template = 'home/blocks/columns.html'

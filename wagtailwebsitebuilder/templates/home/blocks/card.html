@@ -1,0 +1,12 @@
+{% load wagtailcore_tags %}
+
+<div class="card {{ value.css_class }}">
+  {% if value.image %}
+    <div class="card-image">
+      {% include_block value.image %}
+    </div>
+  {% endif %}
+  <div class="card-content">
+      {% include_block value.content %}
+  </div>
+</div>

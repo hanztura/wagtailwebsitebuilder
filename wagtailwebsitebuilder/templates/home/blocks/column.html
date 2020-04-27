@@ -1,0 +1,7 @@
+{% load wagtailcore_tags %}
+
+<div class="column {{ value.css_class }}">
+    {% for block in value.body %}
+        {% include_block block %}
+    {% endfor %}
+</div>
