@@ -1,6 +1,8 @@
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
+from puputextension.helpers import CodeBlock
+
 
 class HeroBlock(blocks.StructBlock):
     title = blocks.CharBlock()
@@ -139,3 +141,15 @@ class ColumnsBlock(blocks.StructBlock):
 
     class Meta:
         template = 'home/blocks/columns.html'
+
+
+class SectionBlock(blocks.StreamBlock):
+    card = CardBlock(required=False)
+    code = CodeBlock(required=False)
+    columns = ColumnsBlock(required=False)
+    image = CustomImageBlock(required=False)
+    richtext = CustomRichTextBlock(required=False)
+    tiles = TileStreamBlock(required=False)
+
+    class Meta:
+        template = 'home/blocks/section.html'
