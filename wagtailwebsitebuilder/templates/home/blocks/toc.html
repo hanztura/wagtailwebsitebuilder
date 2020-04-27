@@ -3,22 +3,24 @@
 <nav class="menu">
   <ul class="menu-list" id="toc">
     <p class="menu-label button is-info" title="Click to show/hide table of contents" @click="showTOC = !showTOC">{{ value.title }}</p>
-    <template v-if="showTOC">
-        {% for item in value.toc_items|json_to_object %}
-          <li>
-            <a class="has-text-link" href="{{ item.link }}">{{ item.text }}</a>
-            <ul>
-              {% if item.items %}
-                {% for subItem in item.items %}
-                  <li>
-                    <a class="has-text-link" href="{{ subItem.link }}">{{ subItem.text }}</a>
-                  </li>
-                {% endfor %}
-              {% endif %}
-            </ul>
-          </li>
-          
-        {% endfor %}
-    </template>
+    <transition-group name="fade">
+        <template v-if="showTOC">
+            {% for item in value.toc_items|json_to_object %}
+              <li key="{{ item.text }}">
+                <a class="has-text-link" href="{{ item.link }}">{{ item.text }}</a>
+                <ul>
+                  {% if item.items %}
+                    {% for subItem in item.items %}
+                      <li>
+                        <a class="has-text-link" href="{{ subItem.link }}">{{ subItem.text }}</a>
+                      </li>
+                    {% endfor %}
+                  {% endif %}
+                </ul>
+              </li>
+              
+            {% endfor %}
+        </template>
+    </transition-group>
   </ul>
 </nav>
