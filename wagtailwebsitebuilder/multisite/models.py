@@ -98,7 +98,6 @@ class Organisation(BaseLDSetting):
     email = models.EmailField()
     twitter_handle = models.CharField(max_length=50)
     facebook_url = models.URLField()
-    facebook_app_id = models.CharField(max_length=100, blank=True)
 
     @property
     def schema_address(self):
@@ -225,3 +224,5 @@ class SeoSettings(BaseSetting):
     )
     robots_txt = models.FileField(
         upload_to='seo/')
+    facebook_app_id = models.CharField(max_length=100, blank=True)
+    facebook_pixel_id = models.CharField(max_length=100, blank=True)

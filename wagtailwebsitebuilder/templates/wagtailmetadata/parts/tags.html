@@ -13,7 +13,7 @@
 <meta property="og:description" content="{{ object.get_meta_description }}" />
 <meta property="og:site_name" content="{{ site_name }}" />
 <meta property="og:type" content="{{ object.og_type }}" />
-{% with settings.multisite.Organisation as organisation %}{% if organisation.facebook_app_id %}<meta property="fb:app_id" content="{{ organisation.facebook_app_id }}" />{% endif %}{% endwith %}
+{% with settings.multisite.SeoSettings as seo %}{% if seo.facebook_app_id %}<meta property="fb:app_id" content="{{ seo.facebook_app_id }}" />{% endif %}{% endwith %}
 {% if meta_image %}<meta property="og:image" content="{{ meta_image }}" />{% endif %}
 {% endblock opengraph %}
 
