@@ -102,7 +102,7 @@ class Organization(Thing):
         self.telephone = telephone
         self.same_as = same_as
 
-        self.attributes_to_get += ['address', 'email', 'telephone', 'same_as']
+        self.attributes_to_get += ['email', 'telephone', 'same_as']
 
 
 class Person(Thing):
