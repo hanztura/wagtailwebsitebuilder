@@ -226,3 +226,5 @@ class SeoSettings(BaseSetting):
         upload_to='seo/')
     facebook_app_id = models.CharField(max_length=100, blank=True)
     facebook_pixel_id = models.CharField(max_length=100, blank=True)
+    brand_name_in_title = models.CharField(max_length=50, blank=True)
+    append_brand_name_in_title = models.BooleanField(default=True)

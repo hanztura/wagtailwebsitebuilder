@@ -15,7 +15,7 @@
         <title>
             {% block title %}
                 {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
-            {% endblock %}
+            {% endblock %} {% if settings.multisite.SeoSettings.append_brand_name_in_title %}| {{ settings.multisite.SeoSettings.brand_name_in_title }}{% endif %}
         </title>
 
         {% block other_metas %}{% endblock %}
@@ -29,6 +29,19 @@
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
+
+
+          {% addtoblock 'css' %}
+            <style>
+              .is-full-height { height: 100% !important;  }
+              .fade-enter-active, .fade-leave-active {
+                transition: opacity .5s;
+              }
+              .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+                opacity: 0;
+              }
+            </style>
+          {% endaddtoblock %}
 
           {% addtoblock 'css' %}
             <link rel="stylesheet" href="{% static 'vendor/fontawesome-free-5.11.2-web/custom/fontawesome.min.css' %}"></link>
