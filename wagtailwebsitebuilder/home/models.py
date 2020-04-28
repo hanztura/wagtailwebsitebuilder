@@ -116,6 +116,8 @@ class HomePage(
         StreamFieldPanel('body', classname='full'),
     ]
 
+    og_type = 'website'
+
     promote_panels = MetadataPageMixin.promote_panels
 
 
@@ -138,6 +140,8 @@ class SitemapPage(WebContentSchemaMixin, PageLDMixin, MetadataPageMixin, Page):
         StreamFieldPanel('hero', classname='full'),
         StreamFieldPanel('body', classname='full'),
     ]
+
+    og_type = 'article'
 
     promote_panels = MetadataPageMixin.promote_panels
 

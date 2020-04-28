@@ -96,8 +96,9 @@ class Organisation(BaseLDSetting):
     address_street = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20)
     email = models.EmailField()
-    twitter_handle = models.CharField(max_length=15)
+    twitter_handle = models.CharField(max_length=50)
     facebook_url = models.URLField()
+    facebook_app_id = models.CharField(max_length=100, blank=True)
 
     @property
     def schema_address(self):
