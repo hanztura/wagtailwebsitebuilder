@@ -115,16 +115,15 @@ class Person(Thing):
 class WebContent(Thing):
 
     def __init__(
-            self, about, author, date_published, date_modified, text,
+            self, about, author, date_published, date_modified,
             *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.about = about.as_thing_python_dict
         self.author = author.as_python_dict
         self.date_published = date_published
         self.date_modified = date_modified
-        self.text = text
 
         self.attributes_to_get += [
             'about', 'author', 'date_published',
-            'date_modified', 'text'
+            'date_modified'
         ]
