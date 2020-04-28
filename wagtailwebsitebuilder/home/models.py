@@ -128,15 +128,9 @@ class HomePage(PageLDMixin, CSSMixin, MetadataPageMixin, Page):
             url=self.get_url(),
         )
         org = Organisation.for_site(site)
-        author = Person(
-            address=org.schema_address,
-            email=self.owner.email,
-            affiliation=org.schema,
-            name=self.owner.get_full_name(),
-            description='')
         web_content = WebContent(
             about=about,
-            author=author,
+            author=org.schema,
             date_published=str(self.first_published_at),
             date_modified=str(self.last_published_at),
             text=str(self.body),
