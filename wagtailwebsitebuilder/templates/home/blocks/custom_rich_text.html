@@ -1,3 +1,5 @@
-<div class="{{ value.css_class }}">
+<div
+  class="{{ value.css_class }}"
+  {% if value.has_microdata %}itemscope itemtype="{{ value.item_type }}"{% endif %}>
   {{ value.body }}
 </div>

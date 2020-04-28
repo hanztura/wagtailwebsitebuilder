@@ -19,6 +19,10 @@ class Thing:
         return self.as_python_dict
 
     @classmethod
+    def get_item_type(cls):
+        return '{}{}'.format(cls.CONTEXT, cls.__name__)
+
+    @classmethod
     def get_thing_optional_attributes(cls):
         return ['url', 'image', 'same_as']
 
@@ -127,3 +131,7 @@ class WebContent(Thing):
             'about', 'author', 'date_published',
             'date_modified'
         ]
+
+
+SCHEMAS = [Thing, PostalAddress, Organization, Person, WebContent]
+ITEM_TYPES_AS_CHOICES = [(s.get_item_type(), s.__name__)for s in SCHEMAS]
