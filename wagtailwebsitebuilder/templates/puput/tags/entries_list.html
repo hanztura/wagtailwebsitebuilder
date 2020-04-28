@@ -6,7 +6,7 @@
             <div class="column is-full">
                 <article class="box post-summary">
                     <h5>
-                        <a href="{% entry_url entry blog_page %}">{{ entry.title }}</a>
+                        <a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>
                     </h5>
                     <ul class="meta">
                         <li>
