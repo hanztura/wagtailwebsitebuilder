@@ -209,3 +209,4 @@ GOOGLE_ANALYTICS_PROPERTY_ID = os.environ.setdefault(
     'WAGTAILWEBSITEBUILDER_GOOGLE_ANALYTICS_PROPERTY_ID', '')
 
 PUPUT_AS_PLUGIN = True
+PUPUT_BLOG_MODEL = 'puputextension.db.CustomBlogPageAbstract'

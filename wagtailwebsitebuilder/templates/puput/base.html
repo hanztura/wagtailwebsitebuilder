@@ -210,4 +210,7 @@
   {% addtoblock "js" %}
       <script src="{% static 'js/lazyLoader.js' %}" defer></script>
   {% endaddtoblock %}
+
+  {% block extra_js_end %}{% endblock extra_js_end %}
+
 {% endblock extra_js %}

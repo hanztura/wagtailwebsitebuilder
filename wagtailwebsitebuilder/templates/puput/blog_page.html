@@ -1,6 +1,6 @@
 {% extends "puput/base.html" %}
 
-{% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share lazyimages_tags %}
+{% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share lazyimages_tags wagtailschemaorg_tags %}
 
 {% block title %}
     {% if search_term %}
@@ -95,3 +95,7 @@
         </div>
     {% endwith %}
 {% endblock content %}
+
+{% block extra_js_end %}
+    {% ld_for_object %}
+{% endblock extra_js_end %}

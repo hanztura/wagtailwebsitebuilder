@@ -119,7 +119,7 @@ class HomePage(
     promote_panels = Page.promote_panels + MetadataPageMixin.panels
 
 
-class SitemapPage(PageLDMixin, MetadataPageMixin, Page):
+class SitemapPage(WebContentSchemaMixin, PageLDMixin, MetadataPageMixin, Page):
     hero = StreamField([
         ('hero', HeroBlock()),
     ], null=True, blank=True)

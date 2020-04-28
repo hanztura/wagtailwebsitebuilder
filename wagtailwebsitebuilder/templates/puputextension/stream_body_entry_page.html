@@ -1,5 +1,5 @@
 {% extends "puput/base.html" %}
-{% load i18n wagtailcore_tags wagtailimages_tags puput_tags social_share static lazyimages_tags %}
+{% load i18n wagtailcore_tags wagtailimages_tags puput_tags social_share static lazyimages_tags wagtailschemaorg_tags %}
 
 {% block title %}
     {{ self.title }} | {{ blog_page.title }}
@@ -105,3 +105,7 @@
         {% include 'puput/related_entries.html' with entry=self %}
     {% endif %}
 {% endblock extra_content %}
+
+{% block extra_js_end %}
+    {% ld_for_object %}
+{% endblock extra_js_end %}

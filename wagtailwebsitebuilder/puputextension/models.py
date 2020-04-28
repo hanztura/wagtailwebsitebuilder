@@ -12,9 +12,10 @@ from wagtail.core.models import Orderable
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtailschemaorg.models import PageLDMixin
 
 from .helpers import CodeBlock
-from home.db import CSSMixin
+from home.db import CSSMixin, WebContentSchemaMixin
 
 
 class CustomBlogPageNavBarItem(Orderable, models.Model):
@@ -39,8 +40,7 @@ class CustomBlogPage(BlogPage):
 
 
 class StreamBodyEntryPage(
-        CSSMixin,
-        EntryPage):
+        WebContentSchemaMixin, PageLDMixin, CSSMixin, EntryPage):
     stream_body = StreamField([
         ('with_id', blocks.StructBlock(
             [
