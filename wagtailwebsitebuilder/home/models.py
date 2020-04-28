@@ -116,7 +116,7 @@ class HomePage(
         StreamFieldPanel('body', classname='full'),
     ]
 
-    promote_panels = Page.promote_panels + MetadataPageMixin.panels
+    promote_panels = MetadataPageMixin.promote_panels
 
 
 class SitemapPage(WebContentSchemaMixin, PageLDMixin, MetadataPageMixin, Page):
@@ -139,7 +139,7 @@ class SitemapPage(WebContentSchemaMixin, PageLDMixin, MetadataPageMixin, Page):
         StreamFieldPanel('body', classname='full'),
     ]
 
-    promote_panels = Page.promote_panels + MetadataPageMixin.panels
+    promote_panels = MetadataPageMixin.promote_panels
 
     def get_context(self, request):
         context = super().get_context(request)
