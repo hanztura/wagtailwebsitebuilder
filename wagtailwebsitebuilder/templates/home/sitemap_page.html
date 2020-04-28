@@ -67,29 +67,33 @@
     </nav>
   </header>
 
-  <main class="content is-full-height">
+  <main class="content">
     {% include_block page.hero  %}
 
-    <section class="section">
-      <div class="container">
-        <nav class="menu">
-          <p class="menu-label"><a href="/">Home</a></p>
-          <ul class="menu-list">
-            {% for child_level_1 in root_page.get_children %}
-                <li><a href="{{ child_level_1.get_url }}">{{ child_level_1.title }}</a></li>
-                {% with child_level_1.get_children as children_2 %}
-                    {% if children_2 %}
-                      <ul>
-                        {% for child_level_2 in children_2 %}
-                            <li><a href="{{ child_level_2.get_url }}">{{ child_level_2.title }}</a></li>
-                        {% endfor %}
-                      </ul>
-                    {% endif %}
-                {% endwith %}
-            {% endfor %}
-          </ul>
-        </nav>
-
+    <section class="section" style="min-height: 100vh;">
+      <div class="container is-full-height">
+        <div class="columns is-full-height is-vcentered">
+          <div class="column">
+            <nav class="menu">
+              <p class="menu-label"><a href="/">Home</a></p>
+              <ul class="menu-list">
+                {% for child_level_1 in root_page.get_children %}
+                    <li><a href="{{ child_level_1.get_url }}">{{ child_level_1.title }}</a></li>
+                    {% with child_level_1.get_children as children_2 %}
+                        {% if children_2 %}
+                          <ul>
+                            {% for child_level_2 in children_2 %}
+                                <li><a href="{{ child_level_2.get_url }}">{{ child_level_2.title }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                    {% endwith %}
+                {% endfor %}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
         {% include_block page.body  %}
       </div>
     </section>
