@@ -98,6 +98,7 @@ class Organisation(BaseLDSetting):
     email = models.EmailField()
     twitter_handle = models.CharField(max_length=50)
     facebook_url = models.URLField()
+    linkedin_url = models.URLField(blank=True)
 
     @property
     def schema_address(self):
@@ -119,7 +120,7 @@ class Organisation(BaseLDSetting):
             self.email,
             self.phone_number,
             [
-                self.twitter_url, self.facebook_url
+                self.twitter_url, self.facebook_url, self.linkedin_url
             ],
             self.name,
             self.description
@@ -130,7 +131,10 @@ class Organisation(BaseLDSetting):
 
     @property
     def twitter_url(self):
-        return 'https://twitter.com/' + self.twitter_handle
+        if self.twitter_handle:
+            return 'https://twitter.com/' + self.twitter_handle
+        else:
+            return ''
 
 
 @register_setting
