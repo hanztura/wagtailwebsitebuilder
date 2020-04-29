@@ -17,7 +17,8 @@ from wagtailschemaorg.models import PageLDMixin
 
 from .db import CSSMixin, WebContentSchemaMixin
 from .blocks import (
-    HeroBlock, CustomRichTextBlock, TileStreamBlock, ColumnsBlock, CardBlock)
+    HeroBlock, CustomRichTextBlock, TileStreamBlock, ColumnsBlock, CardBlock,
+    SchemaPersonBlock, SchemaProductBlock)
 from .helpers import TocBlock, CustomImageBlock
 from puputextension.helpers import CodeBlock
 
@@ -65,6 +66,8 @@ class HomePage(
         ('html', blocks.RawHTMLBlock()),
         ('image', ImageChooserBlock()),
         ('paragraph', blocks.RichTextBlock()),
+        ('schema_product', SchemaProductBlock()),
+        ('schema_person', SchemaPersonBlock()),
         ('table', TableBlock(table_options={
             'minSpareRows': 0,
             'startRows': 3,

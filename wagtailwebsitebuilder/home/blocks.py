@@ -154,3 +154,27 @@ class SectionBlock(blocks.StreamBlock):
 
     class Meta:
         template = 'home/blocks/section.html'
+
+
+class SchemaPersonBlock(blocks.StructBlock):
+    name = blocks.CharBlock()
+    description = blocks.CharBlock(required=False, default='')
+    email = blocks.EmailBlock(required=False, default='')
+    image = ImageChooserBlock(required=False)
+    url = blocks.PageChooserBlock(required=False)
+
+    class Meta:
+        template = 'home/blocks/schemas/person.html'
+
+
+class SchemaProductBlock(blocks.StructBlock):
+    name = blocks.CharBlock()
+    description = blocks.CharBlock(required=False, default='')
+    audience_type = blocks.CharBlock(required=False, default='')
+    price = blocks.CharBlock()
+    price_currency = blocks.CharBlock()
+    image = ImageChooserBlock(required=False)
+    url = blocks.PageChooserBlock(required=False)
+
+    class Meta:
+        template = 'home/blocks/schemas/product.html'

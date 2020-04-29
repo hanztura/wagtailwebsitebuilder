@@ -5,7 +5,8 @@ import stringcase
 class Thing:
     CONTEXT = 'https://schema.org/'
 
-    def __init__(self, name, description, url=None, image=None, same_as=None):
+    def __init__(
+            self, name='', description='', url=None, image=None, same_as=None):
         self.name = name
         self.description = description
         self.url = url
@@ -107,13 +108,12 @@ class Organization(Thing):
 
 class Person(Thing):
 
-    def __init__(self, address, email, affiliation, *args, **kwargs):
+    def __init__(self, email, affiliation, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.address = address.as_python_dict
         self.affiliation = affiliation.as_python_dict
         self.email = email
 
-        self.attributes_to_get += ['address', 'email', 'affiliation']
+        self.attributes_to_get += ['email', 'affiliation']
 
 
 class WebContent(Thing):
@@ -131,6 +131,32 @@ class WebContent(Thing):
             'about', 'author', 'date_published',
             'date_modified'
         ]
+
+
+class Offer(Thing):
+
+    def __init__(
+            self, price, price_currency, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.price = price
+        self.price_currency = price_currency
+
+        self.attributes_to_get += ['price', 'price_currency']
+
+
+class Product(Thing):
+
+    def __init__(
+            self, audience, manufacturer, brand, sku, offer, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.audience = audience.as_python_dict
+        self.manufacturer = manufacturer.as_python_dict
+        self.brand = brand.as_python_dict  # organization
+        self.sku = sku
+        self.offers = offer.as_python_dict
+
+        self.attributes_to_get += [
+            'audience', 'manufacturer', 'brand', 'sku', 'offers']
 
 
 SCHEMAS = [Thing, PostalAddress, Organization, Person, WebContent]
