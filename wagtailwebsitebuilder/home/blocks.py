@@ -5,12 +5,6 @@ from .schemas import ITEM_TYPES_AS_CHOICES
 from puputextension.helpers import CodeBlock
 
 
-class MicrodataMixin:
-    has_microdata = blocks.BooleanBlock(default=False, required=False)
-    item_type = blocks.ChoiceBlock(
-        required=False, choices=ITEM_TYPES_AS_CHOICES)
-
-
 class HeroBlock(blocks.StructBlock):
     title = blocks.CharBlock()
     title_tag = blocks.ChoiceBlock(
@@ -38,9 +32,6 @@ class HeroBlock(blocks.StructBlock):
 class CustomRichTextBlock(blocks.StructBlock):
     body = blocks.RichTextBlock(required=False)
     css_class = blocks.CharBlock(required=False)
-    has_microdata = blocks.BooleanBlock(default=False, required=False)
-    item_type = blocks.ChoiceBlock(
-        required=False, choices=ITEM_TYPES_AS_CHOICES)
 
     class Meta:
         template = 'home/blocks/custom_rich_text.html'
