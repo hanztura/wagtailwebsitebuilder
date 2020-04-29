@@ -76,6 +76,7 @@ INSTALLED_APPS = [
 
     'ajax_contact_forms',
     'puputextension',
+    'system',
     'multisite',
 ]
 
@@ -210,3 +211,7 @@ GOOGLE_ANALYTICS_PROPERTY_ID = os.environ.setdefault(
 
 PUPUT_AS_PLUGIN = True
 PUPUT_BLOG_MODEL = 'puputextension.db.CustomBlogPageAbstract'
+
+WAGTAIL_USER_EDIT_FORM = 'system.forms.CustomUserEditForm'
+# WAGTAIL_USER_CREATION_FORM = 'users.forms.CustomUserCreationForm'
+# WAGTAIL_USER_CUSTOM_FIELDS = ['country', 'status']

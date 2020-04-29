@@ -15,6 +15,7 @@ from wagtailschemaorg.models import BaseLDSetting
 from wagtailschemaorg.registry import register_site_thing
 from wagtailschemaorg.utils import extend
 
+from system.db import SocialMediaAbstractModel
 from home.schemas import Organization, PostalAddress
 
 # The LinkFields and RelatedLink meta-models
@@ -85,7 +86,7 @@ class SocialMediaSettings(BaseSetting):
 
 @register_setting
 @register_site_thing
-class Organisation(BaseLDSetting):
+class Organisation(SocialMediaAbstractModel, BaseLDSetting):
     """Details about this organisation"""
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -96,9 +97,6 @@ class Organisation(BaseLDSetting):
     address_street = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20)
     email = models.EmailField()
-    twitter_handle = models.CharField(max_length=50)
-    facebook_url = models.URLField()
-    linkedin_url = models.URLField(blank=True)
 
     @property
     def schema_address(self):
@@ -128,13 +126,6 @@ class Organisation(BaseLDSetting):
 
     def ld_entity(self):
         return extend(super().ld_entity(), self.schema.as_python_dict)
-
-    @property
-    def twitter_url(self):
-        if self.twitter_handle:
-            return 'https://twitter.com/' + self.twitter_handle
-        else:
-            return ''
 
 
 @register_setting
