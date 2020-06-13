@@ -92,6 +92,7 @@ MIDDLEWARE = [
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 
+    'system.middlewares.RemoteAddrMiddleware'
 ]
 
 ROOT_URLCONF = 'config.urls'
