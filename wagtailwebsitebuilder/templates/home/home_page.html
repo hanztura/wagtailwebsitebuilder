@@ -12,7 +12,11 @@
 {% block global_css %}
 
   {% addtoblock 'css' %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/code.css' %}">
+    <link rel="preload" as="style" href="{% static 'css/code.css' %}" onload="this.onload=null;this.rel='stylesheet'">     
+    <noscript><link rel="stylesheet" href="{% static 'css/code.css' %}"></noscript>
+  {% endaddtoblock %}
+
+  {% addtoblock 'css' %}
     {% with primary=settings.multisite.SiteBranding.primary_color secondary=settings.multisite.SiteBranding.secondary_color accent=settings.multisite.SiteBranding.accent_color accent_2=settings.multisite.SiteBranding.accent_2_color %}
       <style>
         .site-background-primary { background-color: {{ primary }} !important; }
@@ -23,7 +27,8 @@
 
   {% addtoblock 'css' %}
     {% if page.css_url %}
-        <link rel="stylesheet" type="text/css" href="{{ page.css_url }}">
+        <link rel="preload" as="style" href="{{ page.css_url }}" onload="this.onload=null;this.rel='stylesheet'">     
+        <noscript><link rel="stylesheet" href="{{ page.css_url }}"></noscript>
     {% else %}
       {{ block.super }}
     {% endif %}
