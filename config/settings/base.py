@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import environ
+import json
 
 env = environ.Env()
 BASE_DIR = environ.Path(__file__) - 3
@@ -152,6 +153,18 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+DEFAULT_FROM_EMAIL = os.environ.setdefault(
+    'WAGTAILWEBSITEBUILDER_DEFAULT_FROM_EMAIL', 'webmaster@example.com')
+SERVER_EMAIL = os.environ.setdefault(
+    'WAGTAILWEBSITEBUILDER_SERVER_EMAIL', 'server@example.com')
+ADMINS = os.environ.setdefault("WAGTAILWEBSITEBUILDER_ADMINS", '[]')
+# convert admins (in json) to object
+try:
+    ADMINS = json.loads(ADMINS)
+    ADMINS = [tuple(admin) for admin in ADMINS]
+except Exception as e:
+    ADMINS = []
 
 
 # Internationalization

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.core.mail import EmailMessage
 
 from rest_framework import serializers
@@ -24,8 +25,7 @@ class ContactFormSerializer(serializers.ModelSerializer):
     def save(self, *args, **kwargs):
         """Send email to admin then save"""
 
-        from_email = 'webmaster@xofytech.com'  # TODO
-        kwargs['from_email'] = from_email
+        kwargs['from_email'] = settings.DEFAULT_FROM_EMAIL
 
         emails = get_admin_emails_as_flat_list()
         emails = ','.join(emails)  # transform to comma separated strings
@@ -35,7 +35,8 @@ class ContactFormSerializer(serializers.ModelSerializer):
 
         mail_result = self.send_email(contact)
         if mail_result:
-            contact.save(is_admin_notified=True)
+            contact.is_admin_notified = True
+            contact.save()
         return contact
 
     def send_email(self, contact):
