@@ -44,12 +44,19 @@ class ContactFormSerializer(serializers.ModelSerializer):
         email = contact.sender_email
         name = contact.sender_name
         message = contact.sender_message
-        message = '\
-            Name: {}\
-            Email: {}\
-            Message: {}\
-            '.format(name, email, message)
-        subject = 'Contact Form'
+
+        try:
+            host = self.context['request'].get_host()
+        except Exception as e:
+            host = str(settings.ALLOWED_HOSTS)
+
+        message = """
+            From Host: {}
+            Name: {}
+            Email: {}
+            Message: {}
+            """.format(host, name, email, message)
+        subject = '{}: Contact Form'.format(host)
         recipient_list = contact.admin_emails_as_list
 
         email = EmailMessage(
