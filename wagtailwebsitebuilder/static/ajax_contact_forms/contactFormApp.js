@@ -86,6 +86,18 @@ let contactForm = new Vue({
       return csrf;
     },
 
+    resetForm: function (form=false) {
+      // reset form
+      this.name = '';
+      this.emailAddress = '';
+      this.message = '';
+      this.customCaptcha = '';
+
+      if (form) { form.reset() }
+
+      this.setRandomWord();
+    },
+
     sendContactForm: function(e) {
 
       if (!this.showRecaptchaHelp) {
@@ -108,7 +120,8 @@ let contactForm = new Vue({
             }
           })
         .then((response) => {
-          form.reset();
+          this.resetForm(form);
+
           _this.showThankYouModal = true;
           setTimeout(() => { _this.enableSending = true; }, 30000);
         })
