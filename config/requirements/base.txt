@@ -11,7 +11,7 @@ puput==1.1.0
 Pygments==2.6.1
 pygments-style-github==0.4
 stringcase==1.2.0
-wagtail>=2.8,<2.9
+wagtail==2.9.3
 wagtail-lazyimages==0.1.8
-wagtail-metadata==3.0.0
+wagtail-metadata==3.2.0
 wagtail-schema.org==2.0.0

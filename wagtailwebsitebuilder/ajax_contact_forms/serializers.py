@@ -45,17 +45,20 @@ class ContactFormSerializer(serializers.ModelSerializer):
         name = contact.sender_name
         message = contact.sender_message
 
+        request = self.context.get('request', None)
         try:
-            host = self.context['request'].get_host()
+            host = request.get_host()
         except Exception as e:
             host = str(settings.ALLOWED_HOSTS)
 
+        referrer = getattr(request, 'META', {}).get('HTTP_REFERER', '')
+
         message = """
-            From Host: {}
+            URL: {}
             Name: {}
             Email: {}
             Message: {}
-            """.format(host, name, email, message)
+            """.format(referrer, name, email, message)
         subject = '{}: Contact Form'.format(host)
         recipient_list = contact.admin_emails_as_list
 
