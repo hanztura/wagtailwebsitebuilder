@@ -21,3 +21,8 @@ Development
 * Migrate database using `python manage.py migrate`
 * Create super user `python manage.py createsuperuser`
 * Run development server `python manage.py runserver`
+  
+Oscar - eCommerce
+#################
+
+* Populate countries `python manage.py oscar_populate_countries`

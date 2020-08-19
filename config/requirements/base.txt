@@ -12,6 +12,7 @@ django-redis==4.12.1
 django-sekizai==1.1.0
 psycopg2==2.8.4
 puput==1.1.0
+pycountry==20.7.3
 Pygments==2.6.1
 pygments-style-github==0.4
 sorl-thumbnail==12.6.3

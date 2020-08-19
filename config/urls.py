@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
@@ -16,13 +17,13 @@ urlpatterns = [
     path('sitemap.xml', sitemap),
     path('robots.txt', robots),
 
-    path(settings.DJANGO_ADMIN_URL, admin.site.urls),
-    path(settings.WAGTAIL_CMS_URL, include(wagtailadmin_urls)),
-
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path(
         'cms/',
         include('admin_honeypot.urls', namespace='admin_honeypot_cms')),
+
+    path(settings.DJANGO_ADMIN_URL, admin.site.urls),
+    path(settings.WAGTAIL_CMS_URL, include(wagtailadmin_urls)),
 
     path('documents/', include(wagtaildocs_urls)),
 
@@ -46,6 +47,7 @@ urlpatterns = urlpatterns + [
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:
+
     path("", include(puput_urls)),
     path("", include(wagtail_urls)),
 
