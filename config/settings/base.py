@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 
     'django_admin_env_notice',
     'admin_honeypot',
+    'grappelli',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
