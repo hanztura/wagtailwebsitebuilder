@@ -16,8 +16,6 @@ import environ
 import json
 import secrets
 
-from oscar.defaults import *
-
 env = environ.Env()
 BASE_DIR = environ.Path(__file__) - 3
 PROJECT_DIR = BASE_DIR.path('wagtailwebsitebuilder')
@@ -74,47 +72,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
 
-    'django.contrib.sites',
-    'django.contrib.flatpages',
-
-    'oscar.config.Shop',
-    'oscar.apps.analytics.apps.AnalyticsConfig',
-    'oscar.apps.checkout.apps.CheckoutConfig',
-    'oscar.apps.address.apps.AddressConfig',
-    'oscar.apps.shipping.apps.ShippingConfig',
-    'oscar.apps.catalogue.apps.CatalogueConfig',
-    'oscar.apps.catalogue.reviews.apps.CatalogueReviewsConfig',
-    'oscar.apps.communication.apps.CommunicationConfig',
-    'oscar.apps.partner.apps.PartnerConfig',
-    'oscar.apps.basket.apps.BasketConfig',
-    'oscar.apps.payment.apps.PaymentConfig',
-    'oscar.apps.offer.apps.OfferConfig',
-    'oscar.apps.order.apps.OrderConfig',
-    'oscar.apps.customer.apps.CustomerConfig',
-    'oscar.apps.search.apps.SearchConfig',
-    'oscar.apps.voucher.apps.VoucherConfig',
-    'oscar.apps.wishlists.apps.WishlistsConfig',
-    'oscar.apps.dashboard.apps.DashboardConfig',
-    'oscar.apps.dashboard.reports.apps.ReportsDashboardConfig',
-    'oscar.apps.dashboard.users.apps.UsersDashboardConfig',
-    'oscar.apps.dashboard.orders.apps.OrdersDashboardConfig',
-    'oscar.apps.dashboard.catalogue.apps.CatalogueDashboardConfig',
-    'oscar.apps.dashboard.offers.apps.OffersDashboardConfig',
-    'oscar.apps.dashboard.partners.apps.PartnersDashboardConfig',
-    'oscar.apps.dashboard.pages.apps.PagesDashboardConfig',
-    'oscar.apps.dashboard.ranges.apps.RangesDashboardConfig',
-    'oscar.apps.dashboard.reviews.apps.ReviewsDashboardConfig',
-    'oscar.apps.dashboard.vouchers.apps.VouchersDashboardConfig',
-    'oscar.apps.dashboard.communications.apps.CommunicationsDashboardConfig',
-    'oscar.apps.dashboard.shipping.apps.ShippingDashboardConfig',
-
-    # 3rd-party apps that oscar depends on
-    'widget_tweaks',
-    'haystack',
-    'treebeard',
-    'sorl.thumbnail',
-    'django_tables2',
-
     'django_extensions',
     'sekizai',
     'compressor',
@@ -141,9 +98,6 @@ MIDDLEWARE = [
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 
     'system.middlewares.RemoteAddrMiddleware',
-
-    'oscar.apps.basket.middleware.BasketMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -166,11 +120,6 @@ TEMPLATES = [
                 'home.context_processors.get_google_analytics',
                 'sekizai.context_processors.sekizai',
                 'django_admin_env_notice.context_processors.from_settings',
-
-                'oscar.apps.search.context_processors.search_form',
-                'oscar.apps.checkout.context_processors.checkout',
-                'oscar.apps.communication.notifications.context_processors.notifications',
-                'oscar.core.context_processors.metadata',
             ],
         },
     },
@@ -226,11 +175,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-AUTHENTICATION_BACKENDS = (
-    'oscar.apps.customer.auth_backends.EmailBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
 
 DEFAULT_FROM_EMAIL = os.environ.setdefault(
     'WAGTAILWEBSITEBUILDER_DEFAULT_FROM_EMAIL', 'webmaster@example.com')
@@ -320,10 +264,3 @@ WAGTAIL_USER_EDIT_FORM = 'system.forms.CustomUserEditForm'
 ENVIRONMENT_FLOAT = True
 ENVIRONMENT_NAME = "Production server"
 ENVIRONMENT_COLOR = "#E74C3C"
-
-# other oscar settings
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
-    },
-}
