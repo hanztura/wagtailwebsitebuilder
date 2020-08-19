@@ -35,6 +35,9 @@ INSTALLED_APPS = [
     'home',
     'search',
 
+    'django_admin_env_notice',
+    'admin_honeypot',
+
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
@@ -68,7 +71,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
 
-    'admin_honeypot',
     'django_extensions',
     'sekizai',
     'compressor',
@@ -112,9 +114,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
                 'wagtail.contrib.settings.context_processors.settings',
                 'home.context_processors.get_google_analytics',
                 'sekizai.context_processors.sekizai',
+                'django_admin_env_notice.context_processors.from_settings',
             ],
         },
     },
@@ -244,3 +248,7 @@ PUPUT_BLOG_MODEL = 'puputextension.db.CustomBlogPageAbstract'
 WAGTAIL_USER_EDIT_FORM = 'system.forms.CustomUserEditForm'
 # WAGTAIL_USER_CREATION_FORM = 'users.forms.CustomUserCreationForm'
 # WAGTAIL_USER_CUSTOM_FIELDS = ['country', 'status']
+
+ENVIRONMENT_FLOAT = True
+ENVIRONMENT_NAME = "Production server"
+ENVIRONMENT_COLOR = "#E74C3C"
