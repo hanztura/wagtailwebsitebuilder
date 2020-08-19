@@ -6,6 +6,7 @@ django-compressor==2.4
 django-environ==0.4.5
 django-extensions==2.2.6
 django-meta==1.6.1
+django-redis==4.12.1
 django-sekizai==1.1.0
 psycopg2==2.8.4
 puput==1.1.0
