@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import environ
 import json
+import secrets
 
 env = environ.Env()
 BASE_DIR = environ.Path(__file__) - 3
@@ -127,10 +128,20 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.setdefault(
+            'WAGTAILWEBSITEBUILDER_DATABASE_NAME', ''),
+        'USER': os.environ.setdefault('WAGTAILWEBSITEBUILDER_USER', ''),
+        'PASSWORD': os.environ.setdefault(
+            'WAGTAILWEBSITEBUILDER_DATABASE_PASSWORD',
+            ''),
+        'HOST': os.environ.setdefault(
+            'WAGTAILWEBSITEBUILDER_DATABASE_HOST', ''),
+        'PORT': os.environ.setdefault(
+            'WAGTAILWEBSITEBUILDER_DATABASE_PORT', ''),
     }
 }
+DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.setdefault('WAGTAILWEBSITEBUILDER_SECRET_KEY', '')
@@ -165,6 +176,12 @@ try:
     ADMINS = [tuple(admin) for admin in ADMINS]
 except Exception as e:
     ADMINS = []
+
+RANDOM_ADMIN_URL = '{}/'.format(secrets.token_urlsafe(6))
+DJANGO_ADMIN_URL = os.environ.setdefault(
+    'WAGTAILWEBSITEBUILDER_DJANGO_ADMIN_URL', RANDOM_ADMIN_URL)
+WAGTAIL_CMS_URL = os.environ.setdefault(
+    'WAGTAILWEBSITEBUILDER_WAGTAIL_CMS_URL', 'cms/')
 
 
 # Internationalization
@@ -206,14 +223,12 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-DJANGO_ADMIN_URL = os.environ.setdefault(
-    'WAGTAILWEBSITEBUILDER_DJANGO_ADMIN_URL', 'admin/')
-WAGTAIL_CMS_URL = os.environ.setdefault(
-    'WAGTAILWEBSITEBUILDER_WAGTAIL_CMS_URL', 'cms/')
-
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "wagtailwebsitebuilder"
+WAGTAIL_SITE_NAME = os.environ.setdefault(
+    "WAGTAIL_SITE_NAME",
+    "wagtailwebsitebuilder"
+)
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
