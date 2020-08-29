@@ -23,10 +23,10 @@ urlpatterns = [
 
     path(settings.DJANGO_ADMIN_URL, admin.site.urls),
     path(settings.WAGTAIL_CMS_URL, include(wagtailadmin_urls)),
-
+    path('grappelli/', include('grappelli.urls')),
     path('documents/', include(wagtaildocs_urls)),
 
-    url(r'^search/$', search_views.search, name='search'),
+    path('search/', search_views.search, name='search'),
 
     path('ajax-contact-forms/', include('ajax_contact_forms.urls')),
 
@@ -42,19 +42,6 @@ if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns = urlpatterns + [
-    # For anything not caught by a more specific rule above, hand over to
-    # Wagtail's page serving mechanism. This should be the last pattern in
-    # the list:
-
-    path("", include(puput_urls)),
-    path("", include(wagtail_urls)),
-
-    # Alternatively, if you want Wagtail pages to be served from a subpath
-    # of your site, rather than the site root:
-    #    url(r"^pages/", include(wagtail_urls)),
-]
-
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
@@ -64,3 +51,16 @@ if settings.DEBUG:
         # url(r'^__debug__/', include(debug_toolbar.urls)),
 
     ] + urlpatterns
+
+urlpatterns += [
+#     # For anything not caught by a more specific rule above, hand over to
+#     # Wagtail's page serving mechanism. This should be the last pattern in
+#     # the list:
+
+    path("", include(puput_urls)),
+    path("", include(wagtail_urls)),
+
+#     # Alternatively, if you want Wagtail pages to be served from a subpath
+#     # of your site, rather than the site root:
+#     #    url(r"^pages/", include(wagtail_urls)),
+]

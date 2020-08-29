@@ -78,7 +78,7 @@ INSTALLED_APPS = [
     'meta',
     'wagtailmetadata',
     'wagtailschemaorg',
-    # 'block_ip',
+    'block_ip',
 
     'ajax_contact_forms',
     'puputextension',
@@ -89,17 +89,18 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+
+    'system.middlewares.RemoteAddrMiddleware',
+    'block_ip.middleware.BlockIPMiddleware',
+
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 
-    'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 
-    'system.middlewares.RemoteAddrMiddleware',
-    # 'block_ip.middleware.BlockIPMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
