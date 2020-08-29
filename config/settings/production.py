@@ -24,6 +24,7 @@ DATABASES = {
             'WAGTAILWEBSITEBUILDER_DATABASE_HOST', ''),
         'PORT': os.environ.setdefault(
             'WAGTAILWEBSITEBUILDER_DATABASE_PORT', ''),
+        'ATOMIC_REQUESTS': True,
     }
 }
 
