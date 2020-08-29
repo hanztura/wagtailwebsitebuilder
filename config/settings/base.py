@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'meta',
     'wagtailmetadata',
     'wagtailschemaorg',
+    # 'block_ip',
 
     'ajax_contact_forms',
     'puputextension',
@@ -98,6 +99,7 @@ MIDDLEWARE = [
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 
     'system.middlewares.RemoteAddrMiddleware',
+    # 'block_ip.middleware.BlockIPMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'

@@ -1,6 +1,7 @@
 Django==2.2.13
 django-admin-env-notice==0.2
 django-admin-honeypot==1.1.0
+https://github.com/hanztura/django-block-ip
 django-colorfield==0.3.0
 django-compressor==2.4
 django-environ==0.4.5
@@ -14,7 +15,7 @@ puput==1.1.0
 Pygments==2.6.1
 pygments-style-github==0.4
 stringcase==1.2.0
-wagtail==2.9.3
+wagtail==2.10.1
 wagtail-lazyimages==0.1.8
 wagtail-metadata==3.2.0
 wagtail-schema.org==2.0.0
