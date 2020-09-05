@@ -1,4 +1,4 @@
-{% load static wagtailuserbar meta compress sekizai_tags custom_sekizai_tags wagtailschemaorg_tags %}
+{% load static wagtailuserbar meta compress sekizai_tags custom_sekizai_tags wagtailschemaorg_tags wagtailcore_tags  %}
 
 <!DOCTYPE html>
 <html class="no-js has-navbar-fixed-top" lang="en">
@@ -87,7 +87,8 @@
                 {% block footer_start %}{% endblock footer_start %}
                 
                 <p class="has-text-link">
-                  <span class="px-2">© {% now "Y" %} {{ request.site.site_name }}</span> 
+                  {% wagtail_site as current_site %}
+                  <span class="px-2">© {% now "Y" %} {{ current_site.site_name }}</span> 
                 {% for link in settings.multisite.FooterLinks.footer_links.all %}
                     <span class="px-4">&nbsp|&nbsp</span> <a href="{{ link.link }}">{{ link.title }}</a>
                 {% endfor %}

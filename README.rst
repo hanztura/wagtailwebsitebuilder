@@ -26,3 +26,9 @@ Oscar - eCommerce
 #################
 
 * Populate countries `python manage.py oscar_populate_countries`
+
+
+RemovedInWagtail211Warning
+##########################
+
+RemovedInWagtail211Warning: wagtail.core.middleware.SiteMiddleware and the use of request.site is deprecated. Please update your code to use Site.find_for_request(request) in place of request.site, and remove wagtail.core.middleware.SiteMiddleware from MIDDLEWARES

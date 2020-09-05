@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags compress sekizai_tags wagtailschemaorg_tags wagtailmetadata_tags %}
+
+{% block other_metas %}
+    {% meta_tags %}
+    <link rel="canonical" href="{{ page.get_url }}"/>
+{% endblock %}
+
+{% block global_css %}
+
+  {% addtoblock 'css' %}
+    {% with primary=settings.multisite.SiteBranding.primary_color secondary=settings.multisite.SiteBranding.secondary_color accent=settings.multisite.SiteBranding.accent_color accent_2=settings.multisite.SiteBranding.accent_2_color %}
+      <style>
+        .site-background-primary {background-color: '{{ primary }}' !important; }
+        .site-text-secondary { color: '{{ secondary }}' !important; }
+      </style>
+    {% endwith %}
+  {% endaddtoblock %}
+
+  {% addtoblock 'css' %}
+    {% if page.css_url %}
+        <link rel="preload" as="style" href="{{ page.css_url }}" onload="this.onload=null;this.rel='stylesheet'">     
+        <noscript><link rel="stylesheet" href="{{ page.css_url }}"></noscript>
+    {% else %}
+      {{ block.super }}
+    {% endif %}
+  {% endaddtoblock %}
+{% endblock global_css %}
+
+{% block base_content %}
+
+  <header>
+    <nav id="navBar" class="navbar is-fixed-top has-background-primary" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          {% image settings.multisite.SiteBranding.nav_icon fill-112x28 %}
+        </a>
+
+        <a
+          :class="{ 'navbar-burger burger': true, 'is-active': burgerIsActive}"
+          @click="toggleBurger"
+          role="button"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div
+        id="navbarBasicExample"
+        :class="{ 'navbar-menu has-background-primary': true, 'is-active': burgerIsActive}">
+
+        <div class="navbar-end">
+          {% for navbar_item in page.navbar_items.all %}
+            <a class="navbar-item" href="{{ navbar_item.navbar_item.link }}" @click="toggleBurger">
+              {{ navbar_item.navbar_item.text}}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="content">
+    <section class="section">
+      <div class="container">
+      	<h1>{{ page.title }}</h1>
+      	<div class="columns">
+      		{% with page.tutorials.all as page_tutorials %}
+	      		{% for page_tutorial in page_tutorials %}
+	      			{% with page_tutorial.tutorial as tutorial %}
+			      		<div class="column is-half">
+									<div class="card">
+									  <div class="card-image">
+									    <figure class="image is-4by3">
+									      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+									    </figure>
+									  </div>
+									  <div class="card-content">
+									    <div class="media">
+									      <div class="media-left">
+									        <figure class="image is-48x48">
+									          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+									        </figure>
+									      </div>
+									      <div class="media-content">
+									        <p class="title is-4">{{ tutorial.title }}</p>
+									        <p class="subtitle is-6">@johnsmith</p>
+									      </div>
+									    </div>
+
+									    <div class="content">
+									      {{ tutorial.short_description }}
+									    </div>
+									  </div>
+									</div>
+			      		</div>
+	      			{% endwith %}
+	      		{% endfor %}
+      		{% endwith %}
+      	</div>
+      </div>
+    </section>
+  </main>
+
+  {% addtoblock "js_first" %}
+    {% if debug %}
+      <script src="{% static 'vendor/vue/vue.js' %}" defer></script>
+    {% else %}
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js" defer></script>
+    {% endif %}
+  {% endaddtoblock %}
+
+  {% addtoblock "js" %}
+      <script src="{% static "home/navBarApp.js" %}" defer></script>
+  {% endaddtoblock %}
+
+  {% addtoblock "js" %}
+      <script src="{% static "js/toc.js" %}" defer></script>
+  {% endaddtoblock %}
+
+  {% addtoblock "js" %}
+      <script src="{% static "home/componentModal.js" %}" defer></script>
+  {% endaddtoblock %}
+
+  {% addtoblock "js" %}
+      <script src="{% static 'js/lazyLoader.js' %}" defer></script>
+  {% endaddtoblock %}
+
+  {% ld_for_object %}
+{% endblock base_content %}

@@ -21,6 +21,7 @@ urlpatterns = [
         'cms/',
         include('admin_honeypot.urls', namespace='admin_honeypot_cms')),
 
+    path('grappelli/', include('grappelli.urls')),
     path(settings.DJANGO_ADMIN_URL, admin.site.urls),
     path(settings.WAGTAIL_CMS_URL, include(wagtailadmin_urls)),
 
@@ -31,16 +32,6 @@ urlpatterns = [
     path('ajax-contact-forms/', include('ajax_contact_forms.urls')),
 
 ]
-
-
-if settings.DEBUG:
-    from django.conf.urls.static import static
-    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
-    # Serve static and media files from development server
-    urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns = urlpatterns + [
     # For anything not caught by a more specific rule above, hand over to
@@ -64,3 +55,13 @@ if settings.DEBUG:
         # url(r'^__debug__/', include(debug_toolbar.urls)),
 
     ] + urlpatterns
+
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+    # Serve static and media files from development server
+    urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
